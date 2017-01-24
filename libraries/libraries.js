@@ -32,18 +32,18 @@ geenes.typography = {
   baseFontSizes: {
   //  "10px": 10,
   //  "11px": 11,
-    "12px": 12,
-    "13px": 13,
+    // "12px": 12,
+    // "13px": 13,
     "14px": 14,
     "15px": 15,
     "16px": 16,
     "17px": 17,
     "18px": 18,
-    "19px": 19,
-    "20px": 20,
+    // "19px": 19,
+    // "20px": 20,
     },
 
- baseLineRatios: {
+ baseLineM: {
     "1.2": 1.2,
     "1.25": 1.25,
     "1.3": 1.3,
@@ -51,37 +51,45 @@ geenes.typography = {
     "1.5": 1.5,
     },
 
-  typeSettings: function(baseFontSize, ratio, baselineRatio){
+  typeSettings: function(baseFontSize, typeScaleRatio, baselineM, level){
+      l = level;
+      bf = baseFontSize;
+      r = typeScaleRatio;
+      bm = baselineM;
 
-        var baselineHeights = baseFontSize * baselineRatio;
-        var obj = {
-                "-2": {
-                        "font-size": baseFontSize * (1/Math.pow(ratio,2)).toFixed(3),
-                        "line-height": baselineHeights,
-                      },
-                "-1": {
-                        "font-size": baseFontSize * (1/ratio).toFixed(3),
-                        "line-height": baselineHeights,
-                      },
-                "0":  {
-                        "font-size": baseFontSize,
-                        "line-height": baselineHeights,
-                      },
-                "1":  {
-                        "font-size": baseFontSize * ratio,
-                        "line-height": baselineHeights *2,
-                      },
-                "2":  {
-                        "font-size": baseFontSize * (Math.pow(ratio, 2)).toFixed(3),
-                        "line-height": baselineHeights *2,
-                      },
-                "3": {
-                        "font-size": baseFontSize * (Math.pow(ratio,3)).toFixed(3),
-                        "line-height": baselineHeights *3,
-                      },
-            };
+      var blh = this.getBaselineHeight(bf,bm);
+
+      //TODO ADD ERRORS HANDLERS
+
+
+      var obj = {
+            "font-size": bf * this.getTypeScale(r,l),
+            "line-height": this.getLineHeight(blh,r,l),
+      };
 
         return obj; 
+    },
+
+    getTypeScale: function (typeScaleRatio,level) {
+        var typeScale = Math.pow(typeScaleRatio,level).toFixed(3);
+        return typeScale;
+    },
+
+    getBaselineHeight: function (baseFontSize, baselineM ){
+        return (baseFontSize * baselineM).toFixed(3);
+    },
+
+    getLineHeight: function(baselineHeight, typeScaleRatio, level) {
+            
+            var lineHeight;
+            var r = typeScaleRatio;
+            var l = level;
+            var typeScale = this.getTypeScale(r,level);
+
+            lineHeight = baselineHeight;
+        if(level > 0)
+            lineHeight = (baselineHeight * Math.ceil(typeScale)).toFixed(3);
+        return lineHeight;
     }  
 
 };

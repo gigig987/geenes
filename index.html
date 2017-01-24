@@ -3,15 +3,15 @@
   <title>geenes</title>
 
   <script language="javascript" type="text/javascript" src="dna.js"></script>
-  <script language="javascript" type="text/javascript" src="population.js"></script>
+  <script language="javascript" type="text/javascript" src="specimens.js"></script>
   <script language="javascript" type="text/javascript" src="design-document.js"></script>
   <script language="javascript" type="text/javascript" src="libraries/libraries.js"></script>
 
   <script language="javascript" type="text/javascript">
-  var designDocument;
-  designDocument = new designDocument(new DNA());
+  var specimens;
+  specimens = new Specimens(0.05, 10);
 
-  console.log(designDocument.create());
+  console.log(specimens.create());
   </script>
 </head>
 <body>
