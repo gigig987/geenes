@@ -3,7 +3,7 @@
 
       this.dna = dna_; // all genes in DNA
       this.fitness = 1; // How good is this design document?
-      this.design = [] // an array containing all the design rules
+      this.design = {} // an object containing all the design rules
 
   this.create = function() {
       var genes = this.dna.genes; // array listing all the genes necessary to build a specimen
@@ -13,9 +13,12 @@
       var baselineM = geenes.common.randomElement(geenes.typography.baseLineM, genes[1] );   
       var typeScaleRatio = geenes.common.randomElement(geenes.typography.typeScales, genes[2] );
 
-      var TypeSettings = geenes.typography.typeSettings(baseFontSize, typeScaleRatio, baselineM , 0);
+      var tBody = geenes.typography.typeSettings(baseFontSize, typeScaleRatio, baselineM , 0);
+      var tH2 = geenes.typography.typeSettings(baseFontSize, typeScaleRatio, baselineM , 1);
+      var tH1 = geenes.typography.typeSettings(baseFontSize, typeScaleRatio, baselineM , 2);
+      var tSmall = geenes.typography.typeSettings(baseFontSize, typeScaleRatio, baselineM , -1);
 
-      this.design = TypeSettings ;
+      this.design = {"paragraph": tBody, "heading-1": tH1, "heading-2": tH2, "small": tSmall} ;
   }
 
   this.getFitness = function() {

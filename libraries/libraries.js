@@ -52,10 +52,10 @@ geenes.typography = {
     },
 
   typeSettings: function(baseFontSize, typeScaleRatio, baselineM, level){
-      l = level;
-      bf = baseFontSize;
-      r = typeScaleRatio;
-      bm = baselineM;
+      var l = level;
+      var bf = baseFontSize;
+      var r = typeScaleRatio;
+      var bm = baselineM;
 
       var blh = this.getBaselineHeight(bf,bm);
 
