@@ -8,10 +8,16 @@
     <script language="javascript" type="text/javascript" src="design-document.js"></script>
     <script language="javascript" type="text/javascript" src="libraries/libraries.js"></script>
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
     <style>
 html,body,div,span,applet,object,iframe,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,label,legend,p,blockquote,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}body{line-height:1;color:black;background:white;}:focus{outline:0;}table{border-collapse:collapse;border-spacing:0;}caption,th,td{text-align:left;font-weight:normal;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}ol,ul{list-style:none;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}blockquote:before,blockquote:after,q:before,q:after{content:"";}blockquote,q{quotes:"" "";}abbr,acronym{border:0;}
 
 .wrapper {margin:20%;}
+
+html, body {
+    font-family: 'Open Sans', sans-serif;
+}
  </style>
 
 </head>
@@ -36,12 +42,14 @@ html,body,div,span,applet,object,iframe,a,abbr,acronym,address,big,cite,code,del
         h1.appendChild(title);
         h1.style.fontSize = dd[i].design["heading-1"]["font-size"];
         h1.style.lineHeight = dd[i].design["heading-1"]["line-height"] + "px";
+        h1.style.fontWeight = dd[i].design["heading-1"]["font-weight"];
 
         var paragraph = document.createElement("p");
         var bodyText = document.createTextNode("Cominciate a formare la tiella: iniziate facendo uno strato di patate, aggiungete pomodorini a dadini, prezzemolo e sedano tritati, aglio tritato, cipolla tagliata a fette sottili, poco sale, pepe, olio e formaggio grattugiato, completate con le cozze con mezzo guscio e il riso, quindi ripartite dall'inizio formando un ...");
         paragraph.appendChild(bodyText);
         paragraph.style.fontSize = dd[i].design["paragraph"]["font-size"];
         paragraph.style.lineHeight = dd[i].design["paragraph"]["line-height"] + "px";
+        paragraph.style.fontWeight = dd[i].design["paragraph"]["font-weight"];
         paragraph.style.marginBottom = dd[i].design["paragraph"]["line-height"] + "px";
 
 

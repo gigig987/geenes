@@ -51,20 +51,35 @@ geenes.typography = {
     "1.5": 1.5,
     },
 
-  typeSettings: function(baseFontSize, typeScaleRatio, baselineM, level){
+    fontWeights:{
+        "100": 100,
+        "200": 200,
+        "300": 300,
+        "400": 400,
+        "500": 500,
+        "600": 600,
+        "700": 700,
+        "800": 800,
+        "900": 900,
+
+    },
+
+  typeSettings: function(baseFontSize, typeScaleRatio, baselineM, level, baseFontWeight){
       var l = level;
       var bf = baseFontSize;
       var r = typeScaleRatio;
       var bm = baselineM;
+      var bfw = baseFontWeight;
 
       var blh = this.getBaselineHeight(bf,bm);
-
+      
       //TODO ADD ERRORS HANDLERS
 
 
       var obj = {
             "font-size": bf * this.getTypeScale(r,l),
             "line-height": this.getLineHeight(blh,r,l),
+            "font-weight": bfw
       };
 
         return obj; 
@@ -90,7 +105,11 @@ geenes.typography = {
         if(level > 0)
             lineHeight = (baselineHeight * Math.ceil(typeScale)).toFixed(3);
         return lineHeight;
-    }  
+    },
+
+    getFontWeight: function(){
+        return 
+    }, 
 
 };
 

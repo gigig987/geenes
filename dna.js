@@ -8,11 +8,15 @@
   //Constructor (makes a Math.random DNA)
   function DNA(newgenes) {
     // DNA is Math.random floating point values between 0 and 1 (!!)
-    // The genetic sequence
-
-    //[0]= base-font-size
-    //[1]= base-line-height
-    //[2]= type-scale
+    // The genetic sequence:
+    // * CONTRAST *
+    //[0]= general contrast index
+    // * SCALE *
+    //[1]= base-font-size
+    //[2]= base-line-height
+    //[3]= type-scale
+    // * WEIGHT *
+    //[4]= base-font-weight
     
     var len = 20;  // Arbitrary length
     if (newgenes) {
