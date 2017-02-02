@@ -1,5 +1,6 @@
+var geenes = require('./libraries/libraries.js');
 
-  function designDocument(dna_) {
+  exports.designDocument = function(dna_) {
 
       this.dna = dna_; // all genes in DNA
       this.fitness = 1; // How good is this design document?

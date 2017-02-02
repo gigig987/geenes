@@ -6,7 +6,7 @@
 // http://www.genarts.com/karl/papers/siggraph91.html
 
   //Constructor (makes a Math.random DNA)
-  function DNA(newgenes) {
+  exports.DNA = function(newgenes) {
     // DNA is Math.random floating point values between 0 and 1 (!!)
     // The genetic sequence:
     // * CONTRAST *
@@ -17,6 +17,11 @@
     //[3]= type-scale
     // * WEIGHT *
     //[4]= base-font-weight
+    // * FAMILY *
+    //[5]= serif / __
+    //[6]= sans-serif / __ 
+    //[7]= __ / serif
+    //[8]= __ / sans-serif  
     
     var len = 20;  // Arbitrary length
     if (newgenes) {

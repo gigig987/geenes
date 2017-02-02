@@ -1,3 +1,4 @@
+
 // Namespaced library of functions common across multiple usages
 var geenes = geenes || {};
 
@@ -111,10 +112,10 @@ geenes.typography = {
         return 
     }, 
 
-};
+    }
 
 
-
+exports = module.exports = geenes;
 
 
 

@@ -1,13 +1,15 @@
-
+var designDocument = require('./design-document.js');
+var dna = require('./dna.js');
+var geenes = require('./libraries/libraries.js');
 
     // Create the specimens
-  function Specimens(m, num) {
+  exports.Specimens = function(m, num) {
     this.mutationRate = m; // Mutation rate
     this.specimens = [];  // array to hold the current specimens
     this.matingPool = [];
     this.generations = 0;  // Number of generations
     for (var i = 0; i < num; i++) {
-      this.specimens[i] = new designDocument(new DNA());
+      this.specimens[i] = new designDocument.designDocument(new dna.DNA());
     }
 
 
