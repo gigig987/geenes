@@ -1,0 +1,14 @@
+<h1>Projects</h1>
+
+<ul>
+{% for project in projects %}
+<li><a href="/{{ project.projectName}}"><h3>{{ project.projectName }}</h3></a></li>
+{% else %}
+  <li>This would display if the 'item' collection were empty</li>
+{% endfor %}
+</ul>
+
+  <form action="./api/dd" method="POST">
+    <input type="text" placeholder="name" name="name">
+    <button type="submit">Create project</button>
+  </form>

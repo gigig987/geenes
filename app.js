@@ -4,6 +4,7 @@ const app = express();
 const MongoClient = require('mongodb').MongoClient
 
 const bodyParser = require('body-parser');
+const nunjucks = require('nunjucks');
 //modules to REFACTOR
 const geenes = require('./libraries/libraries.js');
 const designDocument = require('./design-document.js');
@@ -26,6 +27,11 @@ MongoClient.connect('mongodb://gigig:zxas12@ds035059.mlab.com:35059/geenes', (er
     })
 })
 
+nunjucks.configure('views', {
+    autoescape: true,
+    express: app
+});
+
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();
@@ -45,24 +51,46 @@ router.get('/', function (req, res) {
 
 
 
-app.get('/', function (req, res) {
-    res.send(dd);
+app.get('/projects', function (req, res) {
+    db.collection('genes').find().toArray(function(err, results) {
+     res.render('projects.html', {project: results});
+
+    })
 });
 
-router.route('/dd')
-    .get(function (req, res) {
+
+app.get('/projects/:id'), function(req,res) {
+    var name = req.params.id;
+    res.render(name);
+    console.log(name);
+    res.end();
+};
+
+router.route('/projects')
+    .post(function (req, res) {
         var s;
-        s = new specimens.Specimens(.5, 5);
+        s = new specimens.Specimens(req.body.name, .5, 5);
         var dd = s.create();
-        res.json(dd[0]);
+            console.log(s);     
 
-         db.collection('genes').save(dd[0].genes, (err, result) => {
-    if (err) return console.log(err)
+         db.collection('genes').save( s, (err, result) => {
+            if (err) return console.log(err)
 
-    console.log('saved to database')
-    res.redirect('/')
-        })
+            console.log('saved to database')
+            res.redirect('/projects')
+                })
     })
+
+router.route('/projects')
+    .get(function (req, res) {
+        db.collection('genes').find({},{'projectName':1, _id: 0}).toArray(function(err, results){ 
+           if(err) res.send(err);
+            res.jsonp(results);
+            
+        });
+    })    
+    
+
 
 
 // REGISTER OUR ROUTES -------------------------------

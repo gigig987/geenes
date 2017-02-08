@@ -18,7 +18,8 @@
   "homepage": "https://github.com/gigig987/geenes#readme",
   "dependencies": {
     "express": "^4.14.1",
-    "mongodb": "^2.2.22"
+    "mongodb": "^2.2.22",
+    "nunjucks": "^3.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

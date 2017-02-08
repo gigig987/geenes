@@ -18,7 +18,7 @@ var geenes = require('./libraries/libraries.js');
       var baseFontWeight = geenes.common.randomElement(geenes.typography.fontWeights, genes[4] );
       var fontWeightContrast = geenes.common.randomElement(geenes.typography.fontWeights, Math.abs((genes[4] -1)));
 
-      console.log( "g4:"+ genes[4] +" 1-g4:"+ Math.abs((genes[4] -1))) ;
+     // console.log( "g4:"+ genes[4] +" 1-g4:"+ Math.abs((genes[4] -1))) ;
       //console.log( Math.abs(1 - (typeScaleRatio -1)) * (genes[4] - genes[5]));
 
 
@@ -28,8 +28,8 @@ var geenes = require('./libraries/libraries.js');
       var tH2 = geenes.typography.typeSettings(baseFontSize, typeScaleRatio, baselineM , 1,fontWeightContrast);
       var tH1 = geenes.typography.typeSettings(baseFontSize, typeScaleRatio, baselineM , 2,fontWeightContrast);
       var tSmall = geenes.typography.typeSettings(baseFontSize, typeScaleRatio, baselineM , -1,baseFontWeight);
-
-      this.design = {"paragraph": tBody, "heading-1": tH1, "heading-2": tH2, "small": tSmall} ;
+//REACTIVATE WHEN GET DESIGN RULES FUNCTION IS CREATED
+    //  this.design = {"paragraph": tBody, "heading-1": tH1, "heading-2": tH2, "small": tSmall} ;
   }
 
   this.getFitness = function() {
