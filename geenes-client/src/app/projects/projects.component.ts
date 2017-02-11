@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectsService } from '../projects.service';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+
+import { Projects } from '../projects.interface';
 
 @Component({
   selector: 'app-projects',
@@ -8,15 +11,33 @@ import { ProjectsService } from '../projects.service';
 })
 export class ProjectsComponent implements OnInit {
 
-   // instantiate posts to an empty array
+   // instantiate projects to an empty array
   projects: any = [];
+  public myForm: FormGroup; // our model driven form
+  public submitted: boolean; // keep track on whether form is submitted
+  public _currentRange: number = 0.05;
 
-  constructor(private projectsService : ProjectsService) { }
+  constructor(private projectsService : ProjectsService, private _fb: FormBuilder) { }
 
   ngOnInit() {
     this.projectsService.getAllProjects().subscribe(p =>{ 
       this.projects = p;
-      })
+    });
+    
+        // the short way
+    this.myForm = this._fb.group({
+            name: ['', [<any>Validators.required, <any>Validators.minLength(3)]],
+            mRate: [this._currentRange, [<any>Validators.required]]
+        });
   }
 
+   createProject(model: Projects, isValid: boolean) {
+        this.submitted = true;
+        //CALL API
+        this.projectsService.createNewProject(model).subscribe(res =>{console.log('response: '+res)});
+    }
+
+    onChange(value:number):void {
+    this._currentRange = value;
+  }
 }

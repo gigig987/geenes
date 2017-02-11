@@ -9,7 +9,8 @@
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor",
-    "build":"ng build && node server.js"
+    "build": "ng build && node server.js",
+    "dev": "nodemon server.js"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +26,8 @@
     "body-parser": "^1.16.0",
     "core-js": "^2.4.1",
     "express": "^4.14.1",
+    "mongodb": "^2.2.22",
+    "mongoose": "^4.8.2",
     "rxjs": "^5.0.1",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.7.2"
@@ -42,6 +45,7 @@
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.0.2",
     "karma-remap-istanbul": "^0.2.1",
+    "nodemon": "^1.11.0",
     "protractor": "~4.0.13",
     "ts-node": "1.2.1",
     "tslint": "^4.3.0",
