@@ -11,7 +11,7 @@ const gen = require('../core/test.js');
 var mongoose = require('mongoose');
 var Project = require('../models/project.js');
 
-mongoose.connect('mongodb://gigig:zxas12@ds035059.mlab.com:35059/geenes');
+mongoose.connect('mongodb://'+process.env.MONGO_USER+':'+process.env.MONGO_PASSWORD+'@ds035059.mlab.com:35059/geenes');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -51,7 +51,7 @@ router.get('/projects/:id', (req, res) => {
 router.post('/projects', (req, res) => {
         var obj = {
     _id:  mongoose.Types.ObjectId(),            
-    name: 'cscc'.//req.body.name,
+    name: 'cscc',//req.body.name,
     mutationRate: req.body.mRate,
     generations: [{specimens:[{
                         _id: mongoose.Types.ObjectId(),
@@ -61,7 +61,7 @@ router.post('/projects', (req, res) => {
                         }]}]
 }
 
-console.log(obj.generations.specimens.dna.genes);
+console.log(obj.generations[0].specimens[0].dna.genes);
         new Project(obj).save(err=>{
                   if (err) {
                         console.log(err);

@@ -19,7 +19,7 @@ function Project(name,m, num) {
     obj = {
       'name':this.projectName,
       'mRate': this.mutationRate,
-      'generations': {'0':this.specimens}
+      'generations': []
     };
     return obj;
 
