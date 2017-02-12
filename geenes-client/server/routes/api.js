@@ -90,4 +90,21 @@ router.post('/projects', (req, res) => {
 
 });
 
+// Get the generations of a specific project
+router.get('/projects/:id/gen', (req, res) => {
+        // Project.find({'_id': req.params.id},'generations', (err, results) => {
+        //         if (err)
+        //         res.status(500).send(error);
+        //         res.status(200).json(results);
+        // })
+        Project.count({'_id': req.params.id}, 
+        (err,results) => {
+                if (err)
+                res.status(500).send(error);
+                res.status(200).json(results);
+        }
+        )
+});
+
+
 module.exports = router;

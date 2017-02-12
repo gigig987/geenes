@@ -40,11 +40,13 @@ export class ProjectsComponent implements OnInit {
         //CALL API
         this.projectsService.createNewProject(model).subscribe(res =>{
           this.refreshList();
-          console.log('response: '+res)
         });
     }
 
     onChange(value:number):void {
     this._currentRange = value;
+  }
+  onSelect():void{
+    console.log('bravo');
   }
 }

@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { ProjectsComponent } from './projects/projects.component';
 
 import { ProjectsService } from './projects.service';
+import { GenerationsComponent } from './generations/generations.component';
 
 // Define the routes
 const ROUTES = [
@@ -17,7 +18,7 @@ const ROUTES = [
     redirectTo: 'projects',
     pathMatch: 'full'
   },
-  {
+    {
     path: 'projects',
     component: ProjectsComponent
   }
@@ -26,7 +27,8 @@ const ROUTES = [
 @NgModule({
   declarations: [
     AppComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    GenerationsComponent,
   ],
   imports: [
     BrowserModule,
