@@ -16,6 +16,11 @@ export class ProjectsService {
     return this.http.get('/api/projects')
       .map(res => res.json());
   }
+   // Get all projects from the API
+  getGenerationsCount(_id) {
+    return this.http.get('/api/projects/'+_id+'/gen')
+      .map(res => res.json());
+  }
 
   createNewProject(body: Object): Observable<any>{
         let bodyString = JSON.stringify(body); 

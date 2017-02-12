@@ -9,7 +9,9 @@ import { AppComponent } from './app.component';
 import { ProjectsComponent } from './projects/projects.component';
 
 import { ProjectsService } from './projects.service';
+import { TemplatesService } from './templates.service';
 import { GenerationsComponent } from './generations/generations.component';
+import { TemplatesComponent } from './templates/templates.component';
 
 // Define the routes
 const ROUTES = [
@@ -29,6 +31,7 @@ const ROUTES = [
     AppComponent,
     ProjectsComponent,
     GenerationsComponent,
+    TemplatesComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ const ROUTES = [
     HttpModule,
     RouterModule.forRoot(ROUTES) 
   ],
-  providers: [ProjectsService], 
+  providers: [ProjectsService,TemplatesService], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,12 @@
+
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    select template <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <div *ngFor="let template of templates"> 
+      <li><a href="#">{{template.name}}</a></li>
+      <li role="separator" class="divider"></li>
+    </div>
+  </ul>
+</div>

@@ -11,6 +11,7 @@ const gen = require('../core/test.js');
 var mongoose = require('mongoose');
 require('mongoose').Promise = global.Promise;
 var Project = require('../models/project.js');
+var Template = require('../models/templates.js');
 
 mongoose.connect('mongodb://' + process.env.MONGO_USER + ':' + process.env.MONGO_PASSWORD + '@ds035059.mlab.com:35059/geenes');
 
@@ -90,13 +91,8 @@ router.post('/projects', (req, res) => {
 
 });
 
-// Get the generations of a specific project
+// Get the number of generations of a specific project
 router.get('/projects/:id/gen', (req, res) => {
-        // Project.find({'_id': req.params.id},'generations', (err, results) => {
-        //         if (err)
-        //         res.status(500).send(error);
-        //         res.status(200).json(results);
-        // })
         Project.count({'_id': req.params.id}, 
         (err,results) => {
                 if (err)
@@ -105,6 +101,23 @@ router.get('/projects/:id/gen', (req, res) => {
         }
         )
 });
+
+router.post('/templates',(req,res)=> {
+        var name = req.body.name;
+        var content = req.body.content;
+       new Template({_id: mongoose.Types.ObjectId(),name: name,content:content}).save(err =>{
+                 if (err)
+                res.status(500).send(error);                    
+       }).then(res.status(200).json('template saved'));
+})
+
+router.get('/templates',(req,res)=> {
+        Template.find({}, (err, results) => {
+                if (err)
+                res.status(500).send(error);
+                res.status(200).json(results);
+        })
+})
 
 
 module.exports = router;
