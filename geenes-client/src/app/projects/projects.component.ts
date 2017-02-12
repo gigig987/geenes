@@ -20,21 +20,28 @@ export class ProjectsComponent implements OnInit {
   constructor(private projectsService : ProjectsService, private _fb: FormBuilder) { }
 
   ngOnInit() {
-    this.projectsService.getAllProjects().subscribe(p =>{ 
-      this.projects = p;
-    });
-    
-        // the short way
+    this.refreshList();
+        // form
     this.myForm = this._fb.group({
             name: ['', [<any>Validators.required, <any>Validators.minLength(3)]],
             mRate: [this._currentRange, [<any>Validators.required]]
         });
   }
 
+  refreshList(){
+    this.projectsService.getAllProjects().subscribe(p =>{ 
+    this.projects = p;
+    console.log(this.projects)
+     });
+  }
+
    createProject(model: Projects, isValid: boolean) {
         this.submitted = true;
         //CALL API
-        this.projectsService.createNewProject(model).subscribe(res =>{console.log('response: '+res)});
+        this.projectsService.createNewProject(model).subscribe(res =>{
+          this.refreshList();
+          console.log('response: '+res)
+        });
     }
 
     onChange(value:number):void {

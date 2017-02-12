@@ -8,6 +8,7 @@ var projectSchema = new Schema({
     _id: ObjectId,
     name: { type: String, required: true },
     mutationRate: {type: Number, default:0.05, required: true},
+    numberOfGenerations: {type: Number, default:1},
     generations:[ { specimens: 
                         [{
                         _id: ObjectId,

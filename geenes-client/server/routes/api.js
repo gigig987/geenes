@@ -24,7 +24,7 @@ db.once('open', function () {
 
 // Get all projects
 router.get('/projects', (req, res) => {
-        Project.find({}, 'name _id', (err, results) => {
+        Project.find({}, '_id name numberOfGenerations', (err, results) => {
                 if (err)
                 res.status(500).send(error);
                 res.status(200).json(results);
@@ -33,14 +33,11 @@ router.get('/projects', (req, res) => {
 
 // Get single project
 router.get('/projects/:id', (req, res) => {
-        db.collection('genes').find({ projectName: req.params.id })
-                .toArray((err, results) => {
-                        if (err)
-                        res.status(500).send(error);
-                        res.status(200).json(results);
-                })
-
-
+        Project.find({'_id': req.params.id}, (err, results) => {
+                if (err)
+                res.status(500).send(error);
+                res.status(200).json(results);
+        })
 });
 
 // create a new project;
@@ -52,7 +49,8 @@ router.post('/projects', (req, res) => {
 
         var specimens = []; // array containing all the specimens
         var design = {}; // object containing all the design rules for the specific specimen
-        var genes = []; //array containing the genes for the specific specimen  
+        var genes = []; //array containing the genes for the specific specimen
+        var numberOfGenerations = 1; // initialising number of generations  
 // 
 //      generate all the data for a single specimen
 // 
@@ -64,7 +62,7 @@ router.post('/projects', (req, res) => {
                         _id: mongoose.Types.ObjectId(),
                         fitness: 1,
                         dna: { genes: genes[i] },
-                        design: { design }
+                        design
                 }
         }
 //      
@@ -74,6 +72,7 @@ router.post('/projects', (req, res) => {
                 _id: mongoose.Types.ObjectId(),
                 name: req.body.name,
                 mutationRate: req.body.mRate,
+                numberOfGenerations: numberOfGenerations,
                 generations: [{
                         specimens: specimens
                 }]
@@ -81,9 +80,10 @@ router.post('/projects', (req, res) => {
 // ACTUAL CODE TO SAVE THE NEW CREATED PROJECT INTO DB
         new Project(obj).save(err => {
                 if (err) {
-                        console.log(err);
+                     res.status(500).send(err);
                 } else {
-                        console.log('projects saved to database');
+                     res.status(200).json('projects saved to database');   
+                
                 }
         });
 
