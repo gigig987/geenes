@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TemplatesService } from '../templates.service';
-import { Template } from '../template';
+import { Template } from '../template.class';
 // import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -21,7 +21,6 @@ export class TemplatesComponent implements OnInit {
 
   }
   templates: Template[];
-  templateContent:String = '';
   selectedTemplate:Template;
 }
 
