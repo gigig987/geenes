@@ -43,9 +43,10 @@ export class ProjectsComponent implements OnInit {
         });
     }
 
-    onChange(value:number):void {
+  onChange(value:number):void {
     this._currentRange = value;
   }
+  
   onSelect():void{
     console.log('bravo');
   }

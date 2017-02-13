@@ -1,7 +1,8 @@
 
 <form>
-  <select name="sel-template" class="bootstrap-select" [(ngModel)]="templateContent" (ngModelChange)="changeTemplate($event)">
-  <option *ngFor="let template of templates" [ngValue]="template" >{{template.name}}</option>
+  <select name="selectedTemplate" class="bootstrap-select" [(ngModel)]="selectedTemplate" > 
+  <option [ngValue]="template" *ngFor="let template of templates"  
+  [attr.selected]="template.id === selectedTemplate?.id ? true : null ">{{template.name}}</option>
 </select>
 </form>
-<div [innerHTML]="templateContent"></div>
+<div [innerHTML]="selectedTemplate?.content"></div>

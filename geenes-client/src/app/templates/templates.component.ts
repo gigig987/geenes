@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TemplatesService } from '../templates.service';
+import { Template } from '../template';
+// import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-templates',
@@ -7,22 +9,19 @@ import { TemplatesService } from '../templates.service';
   styleUrls: ['./templates.component.css']
 })
 export class TemplatesComponent implements OnInit {
-  templates= [];
-  templateContent:String;
 
   constructor(private templatesService : TemplatesService) { }
-
 
   ngOnInit() {
     this.templatesService.getAllTemplates().subscribe(t =>{ 
     this.templates = t;
-    this.templateContent = this.templates[0].content;
+    this.selectedTemplate = this.templates[0]; //!HARDCODED(0) to the first item in the templates collection
+    // Maybe in the future this should be initialised to the last item selected by the user and cached.
+  });
 
-    });
   }
-  changeTemplate(template){
-    this.templateContent = template.content;
-  }
-
-
+  templates: Template[];
+  templateContent:String = '';
+  selectedTemplate:Template;
 }
+
