@@ -8,6 +8,7 @@ import { TemplatesService } from '../templates.service';
 })
 export class TemplatesComponent implements OnInit {
   templates= [];
+  templateContent:String;
 
   constructor(private templatesService : TemplatesService) { }
 
@@ -15,8 +16,13 @@ export class TemplatesComponent implements OnInit {
   ngOnInit() {
     this.templatesService.getAllTemplates().subscribe(t =>{ 
     this.templates = t;
-    console.log(this.templates);
+    this.templateContent = this.templates[0].content;
+
     });
   }
+  changeTemplate(template){
+    this.templateContent = template.content;
+  }
+
 
 }

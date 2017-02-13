@@ -1,12 +1,7 @@
 
-<div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    select template <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <div *ngFor="let template of templates"> 
-      <li><a href="#">{{template.name}}</a></li>
-      <li role="separator" class="divider"></li>
-    </div>
-  </ul>
-</div>
+<form>
+  <select name="sel-template" class="bootstrap-select" [(ngModel)]="templateContent" (ngModelChange)="changeTemplate($event)">
+  <option *ngFor="let template of templates" [ngValue]="template" >{{template.name}}</option>
+</select>
+</form>
+<div [innerHTML]="templateContent"></div>

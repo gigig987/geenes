@@ -22,11 +22,13 @@
     </div>
 
   </div>
+
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let project of projects" (click)="onSelect()">
       <span class="badge">{{project.numberOfGenerations}}</span> {{ project.name }}
     </li>
   </ul>
-</div>
 
 <app-templates></app-templates>
+</div>
+
