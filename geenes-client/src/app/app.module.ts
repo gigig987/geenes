@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
+import { AccordionModule } from 'ng2-bootstrap/accordion';
 
 import { AppComponent } from './app.component';
 import { ProjectsComponent } from './projects/projects.component';
@@ -12,6 +13,7 @@ import { ProjectsService } from './projects.service';
 import { TemplatesService } from './templates.service';
 import { GenerationsComponent } from './generations/generations.component';
 import { TemplatesComponent } from './templates/templates.component';
+
 
 // Define the routes
 const ROUTES = [
@@ -22,7 +24,11 @@ const ROUTES = [
   },
     {
     path: 'projects',
-    component: ProjectsComponent
+    component: ProjectsComponent, 
+    children: [
+    // { path: 'speakersList', component: SpeakersListComponent, outlet: 'list' },
+    // { path: ':id', component: BioComponent, outlet: 'display' }
+    ]
   }
 ];
 
@@ -38,7 +44,8 @@ const ROUTES = [
     ReactiveFormsModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES) 
+    RouterModule.forRoot(ROUTES),
+    AccordionModule.forRoot()
   ],
   providers: [ProjectsService,TemplatesService], 
   bootstrap: [AppComponent]

@@ -25,7 +25,7 @@ db.once('open', function () {
 
 // Get all projects
 router.get('/projects', (req, res) => {
-        Project.find({}, '_id name numberOfGenerations', (err, results) => {
+        Project.find({}, '_id name numberOfGenerations generations._id mutationRate', (err, results) => {
                 if (err)
                 res.status(500).send(error);
                 res.status(200).json(results);
@@ -91,9 +91,9 @@ router.post('/projects', (req, res) => {
 
 });
 
-// Get the number of generations of a specific project
+// Get all the generations for a specific project
 router.get('/projects/:id/gen', (req, res) => {
-        Project.count({'_id': req.params.id}, 
+        Project.find({'_id': req.params.id}, 
         (err,results) => {
                 if (err)
                 res.status(500).send(error);

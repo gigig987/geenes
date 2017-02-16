@@ -22,13 +22,19 @@
     </div>
 
   </div>
+<accordion [closeOthers]="true">
+  <accordion-group *ngFor="let project of projects">
+    <div accordion-heading> {{ project.name }}
+      <span class="badge">{{project.generations.length}}</span>
+    </div>
 
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let project of projects" (click)="onSelect()">
-      <span class="badge">{{project.numberOfGenerations}}</span> {{ project.name }}
-    </li>
-  </ul>
+      <div *ngFor="let gen of project.generations; let i = index">
+        <a (click)="onSelect(gen._id)">
+        Generation #{{i+1}}  {{gen._id}}
+        </a>
+        </div>
 
-<app-templates></app-templates>
+  </accordion-group>
+</accordion>
+
 </div>
-

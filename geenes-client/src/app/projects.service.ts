@@ -16,7 +16,7 @@ export class ProjectsService {
     return this.http.get('/api/projects')
       .map(res => res.json());
   }
-   // Get all projects from the API
+   // Get all generations from projects from the API
   getGenerationsCount(_id) {
     return this.http.get('/api/projects/'+_id+'/gen')
       .map(res => res.json());

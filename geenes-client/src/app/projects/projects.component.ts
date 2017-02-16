@@ -16,6 +16,9 @@ export class ProjectsComponent implements OnInit {
   public myForm: FormGroup; // our model driven form
   public submitted: boolean; // keep track on whether form is submitted
   public _currentRange: number = 0.05;
+  public _projectGenerations: number;
+  public selected: boolean;
+  public prevSelected: boolean;
 
   constructor(private projectsService : ProjectsService, private _fb: FormBuilder) { }
 
@@ -46,8 +49,14 @@ export class ProjectsComponent implements OnInit {
   onChange(value:number):void {
     this._currentRange = value;
   }
-  
-  onSelect():void{
-    console.log('bravo');
+
+  onSelect(_id):void{
+    // this.projectsService.getGenerationsCount(_id).subscribe(res =>{
+    //   this._projectGenerations = res;
+    //   this.selected = true;
+    //   this.prevSelected =  false;
+    // })
+    console.clear();
+    console.log(_id);
   }
 }
