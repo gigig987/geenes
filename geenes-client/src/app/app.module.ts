@@ -13,6 +13,8 @@ import { ProjectsService } from './projects.service';
 import { TemplatesService } from './templates.service';
 import { GenerationsComponent } from './generations/generations.component';
 import { TemplatesComponent } from './templates/templates.component';
+import { ProjectsListComponent } from './projects/projects-list/projects-list.component';
+import { DisplayComponent } from './projects/display/display.component';
 
 
 // Define the routes
@@ -38,6 +40,8 @@ const ROUTES = [
     ProjectsComponent,
     GenerationsComponent,
     TemplatesComponent,
+    ProjectsListComponent,
+    DisplayComponent,
   ],
   imports: [
     BrowserModule,
