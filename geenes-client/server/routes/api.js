@@ -27,7 +27,7 @@ db.once('open', function () {
 router.get('/projects', (req, res) => {
         Project.find({}, '_id name numberOfGenerations generations._id mutationRate', (err, results) => {
                 if (err)
-                res.status(500).send(error);
+                res.status(500).send(err);
                 res.status(200).json(results);
         })
 });
@@ -36,7 +36,7 @@ router.get('/projects', (req, res) => {
 router.get('/projects/:id', (req, res) => {
         Project.find({'_id': req.params.id}, (err, results) => {
                 if (err)
-                res.status(500).send(error);
+                res.status(500).send(err);
                 res.status(200).json(results);
         })
 });
@@ -96,10 +96,22 @@ router.get('/projects/:id/gen', (req, res) => {
         Project.find({'_id': req.params.id}, 
         (err,results) => {
                 if (err)
-                res.status(500).send(error);
+                res.status(500).send(err);
                 res.status(200).json(results);
         }
         )
+});
+
+// Get all the contents for a specific generation
+router.get('/generation/:id', (req, res) => {
+        Project.findOne({'generations._id':req.params.id},'generations.specimens.design.$',
+        (err,results) => {
+                if (err)
+                res.status(500).send(err);
+                res.status(200).json(results);
+        }
+        )
+        
 });
 
 router.post('/templates',(req,res)=> {
@@ -107,14 +119,14 @@ router.post('/templates',(req,res)=> {
         var content = req.body.content;
        new Template({_id: mongoose.Types.ObjectId(),name: name,content:content}).save(err =>{
                  if (err)
-                res.status(500).send(error);                    
+                res.status(500).send(err);                    
        }).then(res.status(200).json('template saved'));
 })
 
 router.get('/templates',(req,res)=> {
         Template.find({}, (err, results) => {
                 if (err)
-                res.status(500).send(error);
+                res.status(500).send(err);
                 res.status(200).json(results);
         })
 })

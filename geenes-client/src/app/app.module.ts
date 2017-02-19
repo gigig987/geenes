@@ -8,13 +8,16 @@ import { AccordionModule } from 'ng2-bootstrap/accordion';
 
 import { AppComponent } from './app.component';
 import { ProjectsComponent } from './projects/projects.component';
-
-import { ProjectsService } from './projects.service';
-import { TemplatesService } from './templates.service';
-import { GenerationsComponent } from './generations/generations.component';
-import { TemplatesComponent } from './templates/templates.component';
+import { TemplatesComponent } from './projects/display/templates/templates.component';
 import { ProjectsListComponent } from './projects/projects-list/projects-list.component';
 import { DisplayComponent } from './projects/display/display.component';
+
+import { ProjectsService } from './projects/shared/projects-list.service';
+import { TemplatesService } from './projects/display/shared/templates.service';
+import { DisplayService } from './projects/display/shared/display.service';
+
+
+
 
 
 // Define the routes
@@ -28,8 +31,8 @@ const ROUTES = [
     path: 'projects',
     component: ProjectsComponent, 
     children: [
-    // { path: 'speakersList', component: SpeakersListComponent, outlet: 'list' },
-    // { path: ':id', component: BioComponent, outlet: 'display' }
+    { path: 'projectsList', component: ProjectsListComponent, outlet: 'list' },
+    { path: ':id', component: DisplayComponent, outlet: 'display' }
     ]
   }
 ];
@@ -38,10 +41,9 @@ const ROUTES = [
   declarations: [
     AppComponent,
     ProjectsComponent,
-    GenerationsComponent,
     TemplatesComponent,
     ProjectsListComponent,
-    DisplayComponent,
+    DisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,7 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES),
     AccordionModule.forRoot()
   ],
-  providers: [ProjectsService,TemplatesService], 
+  providers: [ProjectsService,TemplatesService, DisplayService], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TemplatesService } from '../templates.service';
-import { Template } from '../template.class';
+import { TemplatesService } from '../shared/templates.service';
+import { Template } from '../shared/template.class';
 // import { FormsModule } from '@angular/forms';
 
 @Component({
