@@ -36,7 +36,6 @@ export class ProjectsListComponent implements OnInit {
   refreshList(){
     this.projectsService.getAllProjects().subscribe(p =>{ 
     this.projects = p;
-    console.log(this.projects)
      });
   }
 
@@ -52,7 +51,7 @@ export class ProjectsListComponent implements OnInit {
     this._currentRange = value;
   }
 
-  selectGen(_id):void{
-  this.router.navigate(['/projects', {outlets: {'display': [_id]}}]);
+  selectGen(id):void{
+  this.router.navigate(['/projects', {outlets: {'display': [id]}}]);
   }
 }

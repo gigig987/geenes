@@ -1,3 +1,8 @@
-<p>
-  {{ currentGeneration }}
-</p>
+<app-templates>
+</app-templates>
+<!--<div *ngFor="let specimen of specimens" > 
+  {{ specimen.fitness.design.font-size}}
+</div>-->
+<div *ngFor="let specimen of specimens">
+  <div [innerHTML]="selectedTemplate?.content"></div>
+</div>

@@ -104,11 +104,12 @@ router.get('/projects/:id/gen', (req, res) => {
 
 // Get all the contents for a specific generation
 router.get('/generation/:id', (req, res) => {
-        Project.findOne({'generations._id':req.params.id},'generations.specimens.design.$',
+        Project.findOne({'generations._id':req.params.id},
+        'generations._id generations.specimens.design  generations.specimens.fitness',
         (err,results) => {
                 if (err)
                 res.status(500).send(err);
-                res.status(200).json(results);
+                res.status(200).json(results.generations.id(req.params.id));
         }
         )
         

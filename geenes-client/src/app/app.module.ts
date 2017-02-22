@@ -19,7 +19,6 @@ import { DisplayService } from './projects/display/shared/display.service';
 
 
 
-
 // Define the routes
 const ROUTES = [
   {
@@ -32,7 +31,7 @@ const ROUTES = [
     component: ProjectsComponent, 
     children: [
     { path: 'projectsList', component: ProjectsListComponent, outlet: 'list' },
-    { path: ':id', component: DisplayComponent, outlet: 'display' }
+    { path: ':id', component: DisplayComponent, outlet: 'display'}
     ]
   }
 ];
