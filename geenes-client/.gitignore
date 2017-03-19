@@ -15,6 +15,7 @@
 *.launch
 .settings/
 *.sh
+*.env
 
 # IDE - VSCode
 .vscode/*

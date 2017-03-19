@@ -1,8 +1,7 @@
 
 <form>
-  <select name="selectedTemplate" class="bootstrap-select" [(ngModel)]="selectedTemplate" > 
+  <select name="selectedTemplate" class="bootstrap-select" [(ngModel)]="selectedTemplate" (ngModelChange)="onChange($event)"> 
   <option [ngValue]="template" *ngFor="let template of templates"  
   [attr.selected]="template.id === selectedTemplate?.id ? true : null ">{{template.name}}</option>
 </select>
 </form>
-<div [innerHTML]="selectedTemplate?.content"></div>
