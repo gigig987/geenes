@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList, ElementRef, Renderer } from '@angular/core';
+import { Component, OnInit,OnChanges, ViewChildren, QueryList, ElementRef, Renderer } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DisplayService } from './shared/display.service';
 import { Design } from './shared/design.class';
@@ -14,7 +14,7 @@ import { Template } from './shared/template.class';
 
 
 
-export class DisplayComponent implements OnInit {
+export class DisplayComponent implements OnInit, OnChanges {
 
 
   public design: Design;
@@ -30,18 +30,33 @@ export class DisplayComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-          //CALL to Api generations
+              //CALL to Api generations
       this.route.params.subscribe((params: { id: string }) => {
+         console.log('route changed');
         this.displayService.getGenerationByID(params.id)
           .subscribe((result) => {
             this.specimens = result.specimens;
-            console.log(this.specimens)
+            var genesArray = [];
+            this.specimens.forEach(specimen => {
+               genesArray.push(specimen.dna.genes);
+            });
+            console.log(this.specimens);
+            this.displayService.getStyleByTemplateString('<h1>titolo</h1><p>paragrafo lorem ipsum</p>', genesArray)
+              .subscribe((res)=>{
+                console.log(res);
+              },(error)=>{
+                console.log(error);
+              })
           },
           error => {
             console.log(error);
           });
       });
+  }
+
+  ngOnChanges(){
+console.log('ngOnChanges');
+
   }
 
 
