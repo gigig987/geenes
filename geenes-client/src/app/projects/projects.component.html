@@ -1,10 +1,37 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <router-outlet name="list"></router-outlet>
-    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <router-outlet name="display"></router-outlet>
-    </div>
+    <h3>
+      Create new project</h3>
+    <form [formGroup]="myForm" novalidate (ngSubmit)="createProject(myForm.value, myForm.valid)">
+      <div>
+        <label>Name</label>
+        <input type="text" formControlName="name" placeholder="My fantastic project">
+        <small [hidden]="myForm.controls.name.valid || (myForm.controls.name.pristine && !submitted)">
+        Name is required (minimum 5 characters).
+          </small>
+      </div>
+      <div>
+        <label>Mutation rate: {{_currentRange}}</label>
+        <input type="range" step="0.01" min="0.01" max="0.5" defaultValue="0.1" (change)="onChange($event.target.value)" formControlName="mRate">
+      </div>
+      <button type="submit" [disabled]="!myForm.valid">Submit</button>
+
+    </form>
+
   </div>
-</div>
+
+  <div class="row">
+
+    <div *ngFor="let project of projects" class="col-sm-6 col-md-4 col-lg-3">
+      <div *ngFor="let gen of project.generations; let i = index; let last = last">
+      <a *ngIf="last" [routerLink]="['/project/'+project._id, gen._id]">{{ project.name }} </a>
+        <!--<span class="badge">{{project.generations.length}}</span>-->
+      </div>
+      </div>
+      <!--<div *ngFor="let gen of project.generations; let i = index">
+        <a (click)="selectGen(gen._id)">
+        Generation #{{i+1}}  {{gen._id}}
+        </a>
+      </div>-->
+
+    </div>

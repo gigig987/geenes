@@ -93,8 +93,8 @@ router.post('/projects', (req, res) => {
 });
 
 // Get all the generations for a specific project
-router.get('/projects/:id/gen', (req, res) => {
-        Project.find({'_id': req.params.id}, 
+router.get('/projects/:id/generations', (req, res) => {
+        Project.find({'_id': req.params.id}, 'generations._id',
         (err,results) => {
                 if (err)
                 res.status(500).send(err);
