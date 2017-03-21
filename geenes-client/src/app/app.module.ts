@@ -9,10 +9,9 @@ import { AccordionModule } from 'ng2-bootstrap/accordion';
 import { AppComponent } from './app.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TemplatesComponent } from './projects/display/templates/templates.component';
-import { ProjectsListComponent } from './projects/projects-list/projects-list.component';
 import { DisplayComponent } from './projects/display/display.component';
 
-import { ProjectsService } from './projects/shared/projects-list.service';
+import { ProjectsService } from './projects/shared/projects.service';
 import { TemplatesService } from './projects/display/shared/templates.service';
 import { DisplayService } from './projects/display/shared/display.service';
 
@@ -26,14 +25,8 @@ const ROUTES = [
     redirectTo: 'projects',
     pathMatch: 'full'
   },
-    {
-    path: 'projects',
-    component: ProjectsComponent, 
-    children: [
-    { path: 'projectsList', component: ProjectsListComponent, outlet: 'list' },
-    { path: ':id', component: DisplayComponent, outlet: 'display'}
-    ]
-  }
+    {path: 'projects',component: ProjectsComponent, },
+    { path: 'project/:p_id/:g_id', component: DisplayComponent }
 ];
 
 @NgModule({
@@ -41,7 +34,6 @@ const ROUTES = [
     AppComponent,
     ProjectsComponent,
     TemplatesComponent,
-    ProjectsListComponent,
     DisplayComponent
   ],
   imports: [

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-var bodyParser = require('body-parser');
+
 
 //core
 var project = require('../core/project.js');
@@ -13,6 +13,7 @@ require('mongoose').Promise = global.Promise;
 var Project = require('../models/project.js');
 var Template = require('../models/templates.js');
 
+// mongoose.connect('mongodb://gigig:zxas12@ds035059.mlab.com:35059/geenes');
 mongoose.connect('mongodb://' + process.env.MONGO_USER + ':' + process.env.MONGO_PASSWORD + '@ds035059.mlab.com:35059/geenes');
 
 var db = mongoose.connection;
@@ -92,8 +93,8 @@ router.post('/projects', (req, res) => {
 });
 
 // Get all the generations for a specific project
-router.get('/projects/:id/gen', (req, res) => {
-        Project.find({'_id': req.params.id}, 
+router.get('/projects/:id/generations', (req, res) => {
+        Project.find({'_id': req.params.id}, 'generations._id',
         (err,results) => {
                 if (err)
                 res.status(500).send(err);
@@ -105,7 +106,7 @@ router.get('/projects/:id/gen', (req, res) => {
 // Get all the contents for a specific generation
 router.get('/generation/:id', (req, res) => {
         Project.findOne({'generations._id':req.params.id},
-        'generations._id generations.specimens.design  generations.specimens.fitness',
+        'generations._id generations.specimens.dna.genes  generations.specimens.fitness',
         (err,results) => {
                 if (err)
                 res.status(500).send(err);
@@ -130,6 +131,14 @@ router.get('/templates',(req,res)=> {
                 res.status(500).send(err);
                 res.status(200).json(results);
         })
+})
+
+router.post('/stylist',(req,res)=> {
+       var template = req.body.template;
+       var genesArray = req.body.genesArray;
+       console.log("Received data: " + JSON.stringify(req.body))
+//        console.log('API:' + template,genesArray);
+       res.json(gen.styleFromTemplateString(template, genesArray));
 })
 
 
