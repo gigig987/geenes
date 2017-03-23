@@ -18,10 +18,10 @@
     // * WEIGHT *
     //[4]= base-font-weight
     // * FAMILY *
-    //[5]= serif / __
-    //[6]= sans-serif / __ 
-    //[7]= __ / serif
-    //[8]= __ / sans-serif  
+    //[5]= first font family 
+    //[6]= second font family
+    //[7]= third font family
+
     
     var len = 20;  // Arbitrary length
     if (newgenes) {

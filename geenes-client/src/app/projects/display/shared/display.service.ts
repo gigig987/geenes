@@ -25,7 +25,7 @@ export class DisplayService {
       .map((res) => res.json())
   }
   // call the stylist API
-  getStyleByTemplateString(template: String, genesArray: Array<number>):Observable<any> {
+  getStyleByTemplateString(template: string, genesArray: Array<number>):Observable<any> {
     let headers    = new Headers({ 'Content-Type': 'application/json' }); 
     let options    = new RequestOptions({ headers: headers }); 
     let body = JSON.stringify({ 

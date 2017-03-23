@@ -64,16 +64,165 @@ geenes.typography = {
         "900": 900,
 
     },
-    
 
-    typeSettings: function (level, baseFontSize, typeScaleRatio, baselineM, baseFontWeight) {
+    fontFamilyGroups:{
+        "sans-serif/serif":{
+            "index":0,"pairs":[ 
+                                ["Cabin","Old Standard TT"  ],
+                                ["Fjalla One","Average"  ],
+                                ["Istok Web","Lora"  ],
+                                ["Josefin Sans","Playfair Display"  ],
+                                ["Lato","Merriweather"  ],
+                                ["Montserrat","Cardo"  ],
+                                ["Montserrat","Crimson Text"  ],
+                                ["Montserrat","Domine"  ],
+                                ["Montserrat","Neuton"  ],
+                                ["Montserrat","Playfair Display"  ],
+                                ["Muli","Playfair Display"  ],
+                                ["Nunito","Alegreya"  ],
+                                ["Nunito","Lora"  ],
+                                ["Open Sans","Gentium Book Basic"  ],
+                                ["Open Sans","Libre Baskerville"  ],
+                                ["Open Sans","Lora"  ],
+                                ["Open Sans","Playfair Display SC"  ],
+                                ["Oswald","Merriweather"  ],
+                                ["Oswald","Old Standard TT"  ],
+                                ["Oswald","Quattrocento"  ],
+                                ["PT Sans","PT Serif"  ],
+                                ["Quicksand","EB Garamond"  ],
+                                ["Raleway","Merriweather"  ],
+                                ["Ubuntu","Lora"  ]
+                            ]},
+        "serif/sans-serif":{
+            "index":1,"pairs":[ 
+                                ["Alegreya","Open Sans"  ],
+                                ["Alegreya","Source Sans Pro"  ],
+                                ["Bitter","Raleway"  ],
+                                ["Bree Serif","Open Sans"  ],
+                                ["Cantata One","Imprima"  ],
+                                ["Cardo","Josefin Sans"  ],
+                                ["Crete Round","AbeeZee"  ],
+                                ["Josefin Slab","Josefinsans"  ],
+                                ["Kreon","Ubuntu"  ],
+                                ["Libre Baskerville","Montserrat"  ],
+                                ["Libre Baskerville","Open Sans"  ],
+                                ["Lora","Source Sans Pro"  ],
+                                ["Lustria","Lato"  ],
+                                ["Merriweather","Open Sans"  ],
+                                ["Merriweather","Source Sans Pro"  ],
+                                ["Old Standard TT","Questrial"  ],
+                                ["Ovo","Muli"  ],
+                                ["Playfair Display","Open Sans"  ],
+                                ["PT Serif","Open Sans"  ],
+                                ["Quattrocento","Quattrocento Sans"  ],
+                                ["Roboto Slab","Open Sans"  ],
+                                ["Roboto Slab","Roboto"  ],
+                                ["Rokkitt","Roboto"  ],
+                                ["Rokkitt","Ubuntu"  ],
+                                ["Rufina","Sintony"  ],
+                                ["Vollkorn","Exo"  ]
+                            ]},
+        "sans-serif/sans-serif": {
+            "index":2,"pairs":[
+                                ["Abel","Ubuntu"  ],
+                                ["Amaranth","Titillium Web"  ],
+                                ["Didact Gothic","Arimo"  ],
+                                ["Dosis","Open Sans"  ],
+                                ["Droid Sans","Cabin"  ],
+                                ["Fjalla One","Cantarell"  ],
+                                ["Francois One","Didact Gothic"  ],
+                                ["Francois One","Lato"  ],
+                                ["Francois One","Open Sans"  ],
+                                ["Hind","Open Sans"  ],
+                                ["Montserrat","Hind"  ],
+                                ["Montserrat","Istok Web"  ],
+                                ["Nunito","Open Sans"  ],
+                                ["Open Sans","Nunito"  ],
+                                ["Open Sans","Oswald"  ],
+                                ["Oswald","Droid Sans"  ],
+                                ["Oswald","Open Sans"  ],
+                                ["Oxygen","Source Sans Pro"  ],
+                                ["Philosopher","Muli"  ],
+                                ["PT Sans","Cabin"  ],
+                                ["PT Sans","Didact Gothic"  ],
+                                ["Raleway","Cabin"  ],
+                                ["Raleway","Roboto"  ],
+                                ["Roboto","Nunito"  ],
+                                ["Signika","Open Sans"  ],
+                                ["Ubuntu","Cabin"  ],
+                                ["Ubuntu","Didact Gothic"  ],
+                                ["Ubuntu","Hind"  ],
+                                ["Ubuntu","Source Sans Pro"  ]
+                                ]},
+        "cursive/sans-serif": {
+            "index":3,"pairs":[
+                                ["Abril Fatface","Droid Sans"  ],
+                                ["Abril Fatface","Josefin Sans"  ],
+                                ["Abril Fatface","Lato"  ],
+                                ["Amatic SC","Andika"  ],
+                                ["Amatic SC","Josefin Sans"  ],
+                                ["Bevan","Pontano Sans"  ],
+                                ["Flamenco","Asap"  ],
+                                ["Lobster","Arimo"  ],
+                                ["Lobster","Cabin"  ],
+                                ["Medula One","Lato"  ],
+                                ["Pacifico","Arimo"  ],
+                                ["Patua One","Oswald"  ],
+                                ["Rancho","Gudea"  ],
+                                ["Shadows","Roboto"  ],
+                                ["Squada One","Allerta"  ],
+                                ["Stint Ultra","Pontano Sans"  ],
+                                ["Yeseva One","Josefin Sans"  ]
+                                ]},
+        "cursive/serif":{
+            "index":4,"pairs":[
+                                ["Alfaslab One","Gentium Book"  ],
+                                ["Clicker Script","EB Garamond"  ],
+                                ["Dancing Script","Ledger"  ],
+                                ["Dancing Script","EB Garamond"  ],
+                                ["Nixie One","Ledger"  ],
+                                ["Patua One","Lora"  ],
+                                ["Nixie One","Libre Baskerville"  ],
+                                ["Sacramento","Alice"  ],
+                                ["Sansita One","Kameron"  ],
+                                ["Unica One","Vollkorn"  ],
+                                ["Walter Turncoat","Kreon"  ],
+                                ["Yeseva One","Crimson Text"  ]
+                                ]},
+        "serif/serif":{
+            "index":5,"pairs":[
+                                ["Bree Serif","Lora"  ],
+                                ["Playfair Display","Alice"  ],
+                                ["Playfair Display","Fauna One"  ],
+                                ["Quando","Judson"  ],
+                                ["Quattrocento","Fanwood Text"  ],
+                                ["Ultra","Slabo 13px"  ]
+                                ]}
+    },
+    
+    fontFamilyContrast: {
+        0:{"numberOfTypefaces":1, "fontFamilyGroups":[0,1,2,5]},
+        1:{"numberOfTypefaces":2, "fontFamilyGroups":[2]},
+        2:{"numberOfTypefaces":2, "fontFamilyGroups":[2,5]},
+        3:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1]},
+        4:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1,4]},
+        5:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1,3]},
+        6:{"numberOfTypefaces":3, "fontFamilyGroups":[0,1,2,5]},
+        7:{"numberOfTypefaces":3, "fontFamilyGroups":[0,1,3,4]}
+
+    },
+
+    typeSettings: function (level, baseFontSize, typeScaleRatio, baselineM, baseFontWeight, contrastIndex,constructorFontFamily) {
         var l = level;
         var bf = baseFontSize;
         var r = typeScaleRatio;
         var bm = baselineM;
         var bfw = baseFontWeight;
+        var cx = contrastIndex;
+        var cfm = constructorFontFamily;
 
         var blh = this.getBaselineHeight(bf, bm);
+        var fm = this.getFontFamily(cx,cfm);
 
         //TODO ADD ERRORS HANDLERS
 
@@ -81,7 +230,8 @@ geenes.typography = {
         var obj = {
             "font-size": bf * this.getTypeScale(r, l),
             "line-height": this.getLineHeight(blh, r, l),
-            "font-weight": bfw
+            "font-weight": bfw,
+            "font-family": this.getFontFamilyContrast(cx)
         };
 
         return obj;
@@ -112,6 +262,30 @@ geenes.typography = {
     getFontWeight: function () {
         return
     },
+
+    getFontFamily: function(contrastIndex, constructorFontFamily){
+        var fontFamilyContrast = this.getFontFamilyContrast(contrastIndex);
+        var numberOfTypefaces = fontFamilyContrast.numberOfTypefaces;
+
+        switch (numberOfTypefaces) {
+    case 1:
+       return geenes.common.randomElement(constructorFontFamily[0]);
+
+        break;
+    case 1:
+        day = "Monday";
+        break;
+    case 3:
+        day = "Tuesday";
+
+}
+
+
+    },
+
+    getFontFamilyContrast: function(contrastIndex){
+            return geenes.common.randomElement(this.fontFamilyContrast, contrastIndex);
+    }
 
 }
 

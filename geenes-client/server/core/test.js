@@ -75,6 +75,7 @@ var result = {};
 
   var baseFontWeight;
   var fontWeightContrast;
+  var constructorFontFamily = [];
   var i = 0;
 
 if (genesArray.constructor === Array){
@@ -86,15 +87,20 @@ if (genesArray.constructor === Array){
 
    baseFontWeight = geenes.common.randomElement(geenes.typography.fontWeights, genes[4]);
    fontWeightContrast = geenes.common.randomElement(geenes.typography.fontWeights, Math.abs((genes[4] - 1)));
+
+   constructorFontFamily = [genes[5],genes[6],genes[7]];
+   
+
+
    result[i] = {};
     var parser = new htmlparser.Parser({
     onopentag: function (name, attribs) {
       if (name === "p") {
-         var p = geenes.typography.typeSettings(0, baseFontSize, typeScaleRatio, baselineM, baseFontWeight);
+         var p = geenes.typography.typeSettings(0, baseFontSize, typeScaleRatio, baselineM, baseFontWeight,constrastIndex, constructorFontFamily);
             result[i].p = p;
       }
       if (name === "h1") {
-         var h1 = geenes.typography.typeSettings(3, baseFontSize, typeScaleRatio, baselineM, fontWeightContrast);
+         var h1 = geenes.typography.typeSettings(3, baseFontSize, typeScaleRatio, baselineM, fontWeightContrast,constrastIndex,constructorFontFamily);
             result[i].h1 = h1;
       }
     },
