@@ -1,3 +1,4 @@
-export interface Generation {
+export interface Specimen {
+    id: string,
     
 }
