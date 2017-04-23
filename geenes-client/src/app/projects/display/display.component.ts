@@ -16,7 +16,7 @@ var WebFont = require('webfontloader');
   templateUrl: './display.component.html',
   providers: [DisplayService],
   // styles:[':host >>> div[data-index="1"] h1 {color:'+this.color+';}']
-   styleUrls: ['./display.component.css']
+  styleUrls: ['./display.component.css']
 })
 
 
@@ -27,6 +27,7 @@ export class DisplayComponent implements OnInit {
   public design: Design;
   public generations: any;
   public specimens = [];
+  public fonts: Array<string>;
   public selectedTemplate: Template;
   private gId;
 
@@ -53,28 +54,24 @@ export class DisplayComponent implements OnInit {
   private getStyle(genesArray) {
     this.displayService.getStyleByTemplateStringToHtml(this.selectedTemplate.content, genesArray) //this.selectedTemplate.content
       .subscribe((res) => {
-        WebFont.load({
-    google: {
-      families: ['Rubik Mono One']
-    }
-  });
-        this.specimens.forEach((specimen,i) => {
-          specimen.content = res[i];
-            console.log(specimen.content);
-
-//             var  str_Elemenr = `
-//     <script>
-//    WebFontConfig = {
-//   google: {
-//     families: ['Rubik Mono One']
-//   }
-//    };
-// </script> 
-//     `;
-//     var nodeElement =   this.createDiv("div",str_Elemenr);
-//     document.body.appendChild(nodeElement);
+        this.fonts = [];
+        this.specimens.forEach((specimen, i) => {
+          specimen.content = res[i].html;
+          this.fonts.push(res[i].fonts);
+         
+          
         });
-       
+        console.log(this.fonts);
+         var flattened = this.fonts.reduce(function (a, b) {
+            return a.concat(b);
+          });
+          console.log(flattened);
+        WebFont.load({
+          google: {
+            families: flattened
+          }
+        });
+
       }, (error) => {
         console.log(error);
       })
@@ -82,30 +79,24 @@ export class DisplayComponent implements OnInit {
 
 
 
-  ngOnInit(){
-    
-}
+  ngOnInit() {
 
+  }
 
-createDiv(node_name,textElement) {
-          var _nodeElement = document.createElement(node_name);
-          _nodeElement.innerHTML = textElement;
-          return _nodeElement;
-}
 
   ngOnDestroy() {
     // Clean sub to avoid memory leak
     this.sub.unsubscribe();
   }
 
-    onSelectTemplate(template: Template): void {
-      this.selectedTemplate = template;
-       this.sub = this.route.params.subscribe(params => {
+  onSelectTemplate(template: Template): void {
+    this.selectedTemplate = template;
+    this.sub = this.route.params.subscribe(params => {
       let gId = params['g_id'];
       let pId = params['p_id'];
-     this.getGeneration(gId);
+      this.getGeneration(gId);
     });
 
-    }
+  }
 
 }

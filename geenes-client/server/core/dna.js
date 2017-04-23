@@ -18,9 +18,8 @@
     // * WEIGHT *
     //[4]= base-font-weight
     // * FAMILY *
-    //[5]= first font family 
-    //[6]= second font family
-    //[7]= third font family
+    //[5]= font family 
+
 
     
     var len = 20;  // Arbitrary length

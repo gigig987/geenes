@@ -142,11 +142,12 @@ function styleFromTemplateStringToHtml(template, genesArray) {
       baseFontWeight = geenes.common.randomElement(geenes.typography.fontWeights, genes[4]);
       fontWeightContrast = geenes.common.randomElement(geenes.typography.fontWeights, Math.abs((genes[4] - 1)));
 
-      constructorFontFamily = [genes[5], genes[6], genes[7]];
+      constructorFontFamily = genes[5];
 
 
 
       result[i] = {};
+
       var $ = cheerio.load(template);
       if ($('p')) {
         var obj = geenes.typography.typeSettings(0, baseFontSize, typeScaleRatio, baselineM, baseFontWeight, constrastIndex, constructorFontFamily);
@@ -159,7 +160,6 @@ function styleFromTemplateStringToHtml(template, genesArray) {
       if ($('h1')) {
         var obj = geenes.typography.typeSettings(3, baseFontSize, typeScaleRatio, baselineM, baseFontWeight, constrastIndex, constructorFontFamily);
         Object.keys(obj).forEach(function (key) {
-          console.log(key, obj[key]);
           $('h1').css(key, obj[key]);
           });
         }   
@@ -171,13 +171,11 @@ function styleFromTemplateStringToHtml(template, genesArray) {
           });
         }   
 
-
-    result[i] = $.html();
+    result[i].fonts = geenes.typography.getFontFamily( constrastIndex, constructorFontFamily);    
+    result[i].html = $.html();
     i++;
   }, this);
 }
-
-//  console.log(result);
 return result;
 }
 

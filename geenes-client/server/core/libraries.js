@@ -201,9 +201,11 @@ geenes.typography = {
     },
     
     fontFamilyContrast: {
-        0:{"numberOfTypefaces":1, "fontFamilyGroups":["sans-serif/serif", "serif/sans-serif"]},
-        1:{"numberOfTypefaces":2, "fontFamilyGroups":["sans-serif/sans-serif"]},
-        2:{"numberOfTypefaces":2, "fontFamilyGroups":["sans-serif/serif", "serif/sans-serif"]},
+        0:{"numberOfTypefaces":1, "fontFamilyGroup":"sans-serif/serif"},
+        1:{"numberOfTypefaces":2, "fontFamilyGroup":"sans-serif/sans-serif"},
+        2:{"numberOfTypefaces":2, "fontFamilyGroup":"sans-serif/serif"},
+        3:{"numberOfTypefaces":2, "fontFamilyGroup":"serif/sans-serif"},
+        4:{"numberOfTypefaces":2, "fontFamilyGroup":"cursive/serif"},
         // 3:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1]},
         // 4:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1,4]},
         // 5:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1,3]},
@@ -223,15 +225,18 @@ geenes.typography = {
 
         var blh = this.getBaselineHeight(bf, bm);
         var fm = this.getFontFamily(cx,cfm);
+        var fml = l==0 ? 1 : 0 //return the second element of the font pair which is the body one
+         
+
 
         //TODO ADD ERRORS HANDLERS
 
-
+        console.log(fml);
         var obj = {
             "font-size": bf * this.getTypeScale(r, l)+"px",
             "line-height": this.getLineHeight(blh, r, l)+"px",
             "font-weight": bfw,
-            // "font-family": fm
+            "font-family": fm[fml]
         };
 
         return obj;
@@ -266,22 +271,16 @@ geenes.typography = {
     getFontFamily: function(contrastIndex, constructorFontFamily){
         var fontFamilyContrast = this.getFontFamilyContrast(contrastIndex);
         var numberOfTypefaces = fontFamilyContrast.numberOfTypefaces;
-        fontFamilyContrast.fontFamilyGroups.forEach((group)=>{
-            //  console.log(this.fontFamilyGroups[group].pairs);
-            // console.log('gruppo:'+group);
-        });
-       
 
         switch (numberOfTypefaces) {
     case 1:
-       return geenes.common.randomElement(this.fontFamilyGroups["sans-serif/sans-serif"].pairs, constructorFontFamily[0]);
-
+       return geenes.common.randomElement(this.fontFamilyGroups[fontFamilyContrast.fontFamilyGroup].pairs, constructorFontFamily);
         break;
-    case 1:
-       return geenes.common.randomElement(this.fontFamilyGroups["sans-serif/sans-serif"].pairs, constructorFontFamily[0]);
+    case 2:
+       return geenes.common.randomElement(this.fontFamilyGroups[fontFamilyContrast.fontFamilyGroup].pairs, constructorFontFamily);
         break;
     case 3:
-        return geenes.common.randomElement(this.fontFamilyGroups["sans-serif/sans-serif"].pairs, constructorFontFamily[0]);
+        return geenes.common.randomElement(this.fontFamilyGroups[fontFamilyContrast.fontFamilyGroup].pairs, constructorFontFamily);
 }
 
 
