@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 
 import { AccordionModule } from 'ng2-bootstrap/accordion';
 
+import { SafeHtmlPipe } from './shared/safeHtml.pipe';
+
 import { AppComponent } from './app.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TemplatesComponent } from './projects/display/templates/templates.component';
@@ -34,7 +36,8 @@ const ROUTES = [
     AppComponent,
     ProjectsComponent,
     TemplatesComponent,
-    DisplayComponent
+    DisplayComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,

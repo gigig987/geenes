@@ -1,9 +1,14 @@
-import { Component, OnInit, ViewChildren, QueryList, ElementRef, Renderer } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 import { DisplayService } from './shared/display.service';
 import { Design } from './shared/design.class';
 import { Template } from './shared/template.class';
 import { Observable } from 'rxjs/Observable';
+var WebFont = require('webfontloader');
+
+
+
 
 
 @Component({
@@ -11,7 +16,7 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './display.component.html',
   providers: [DisplayService],
   // styles:[':host >>> div[data-index="1"] h1 {color:'+this.color+';}']
-  // styleUrls: ['./display.component.css']
+   styleUrls: ['./display.component.css']
 })
 
 
@@ -23,13 +28,12 @@ export class DisplayComponent implements OnInit {
   public generations: any;
   public specimens = [];
   public selectedTemplate: Template;
+  private gId;
 
-  @ViewChildren('styledSpecimen') divs: QueryList<ElementRef>;;
 
   constructor(
     private route: ActivatedRoute,
     private displayService: DisplayService,
-    private renderer: Renderer
   ) {     //CALL to Api generations
 
   }
@@ -47,24 +51,47 @@ export class DisplayComponent implements OnInit {
       });
   }
   private getStyle(genesArray) {
-    this.displayService.getStyleByTemplateString('<h1>ciao</h1><p>dasdsa</p>', genesArray) //this.selectedTemplate.content
+    this.displayService.getStyleByTemplateStringToHtml(this.selectedTemplate.content, genesArray) //this.selectedTemplate.content
       .subscribe((res) => {
-        console.log(res);
+        WebFont.load({
+    google: {
+      families: ['Rubik Mono One']
+    }
+  });
+        this.specimens.forEach((specimen,i) => {
+          specimen.content = res[i];
+            console.log(specimen.content);
+
+//             var  str_Elemenr = `
+//     <script>
+//    WebFontConfig = {
+//   google: {
+//     families: ['Rubik Mono One']
+//   }
+//    };
+// </script> 
+//     `;
+//     var nodeElement =   this.createDiv("div",str_Elemenr);
+//     document.body.appendChild(nodeElement);
+        });
+       
       }, (error) => {
         console.log(error);
       })
   }
-  ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      let gId = params['g_id'];
-      let pId = params['p_id'];
-      this.getGeneration(gId);
-
-      
-    });
-  }
 
 
+
+  ngOnInit(){
+    
+}
+
+
+createDiv(node_name,textElement) {
+          var _nodeElement = document.createElement(node_name);
+          _nodeElement.innerHTML = textElement;
+          return _nodeElement;
+}
 
   ngOnDestroy() {
     // Clean sub to avoid memory leak
@@ -73,15 +100,12 @@ export class DisplayComponent implements OnInit {
 
     onSelectTemplate(template: Template): void {
       this.selectedTemplate = template;
+       this.sub = this.route.params.subscribe(params => {
+      let gId = params['g_id'];
+      let pId = params['p_id'];
+     this.getGeneration(gId);
+    });
 
-      //this.displayService.getGenerationsByProjectID(this.pId).subscribe(result => { this.generations = result; console.log(this.generations) })
-
-      //test assignement of style to HTML markup tags
-      let elements: Array<any>;
-      elements = this.divs.toArray()[0].nativeElement.children;
-      Array.from(elements).forEach(element => {
-          console.log(element.nodeName);
-      }); //end foreach
     }
 
 }

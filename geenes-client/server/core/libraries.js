@@ -201,14 +201,14 @@ geenes.typography = {
     },
     
     fontFamilyContrast: {
-        0:{"numberOfTypefaces":1, "fontFamilyGroups":[0,1,2,5]},
-        1:{"numberOfTypefaces":2, "fontFamilyGroups":[2]},
-        2:{"numberOfTypefaces":2, "fontFamilyGroups":[2,5]},
-        3:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1]},
-        4:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1,4]},
-        5:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1,3]},
-        6:{"numberOfTypefaces":3, "fontFamilyGroups":[0,1,2,5]},
-        7:{"numberOfTypefaces":3, "fontFamilyGroups":[0,1,3,4]}
+        0:{"numberOfTypefaces":1, "fontFamilyGroups":["sans-serif/serif", "serif/sans-serif"]},
+        1:{"numberOfTypefaces":2, "fontFamilyGroups":["sans-serif/sans-serif"]},
+        2:{"numberOfTypefaces":2, "fontFamilyGroups":["sans-serif/serif", "serif/sans-serif"]},
+        // 3:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1]},
+        // 4:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1,4]},
+        // 5:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1,3]},
+        // 6:{"numberOfTypefaces":3, "fontFamilyGroups":[0,1,2,5]},
+        // 7:{"numberOfTypefaces":3, "fontFamilyGroups":[0,1,3,4]}
 
     },
 
@@ -228,10 +228,10 @@ geenes.typography = {
 
 
         var obj = {
-            "font-size": bf * this.getTypeScale(r, l),
-            "line-height": this.getLineHeight(blh, r, l),
+            "font-size": bf * this.getTypeScale(r, l)+"px",
+            "line-height": this.getLineHeight(blh, r, l)+"px",
             "font-weight": bfw,
-            "font-family": this.getFontFamilyContrast(cx)
+            // "font-family": fm
         };
 
         return obj;
@@ -266,18 +266,22 @@ geenes.typography = {
     getFontFamily: function(contrastIndex, constructorFontFamily){
         var fontFamilyContrast = this.getFontFamilyContrast(contrastIndex);
         var numberOfTypefaces = fontFamilyContrast.numberOfTypefaces;
+        fontFamilyContrast.fontFamilyGroups.forEach((group)=>{
+            //  console.log(this.fontFamilyGroups[group].pairs);
+            // console.log('gruppo:'+group);
+        });
+       
 
         switch (numberOfTypefaces) {
     case 1:
-       return geenes.common.randomElement(constructorFontFamily[0]);
+       return geenes.common.randomElement(this.fontFamilyGroups["sans-serif/sans-serif"].pairs, constructorFontFamily[0]);
 
         break;
     case 1:
-        day = "Monday";
+       return geenes.common.randomElement(this.fontFamilyGroups["sans-serif/sans-serif"].pairs, constructorFontFamily[0]);
         break;
     case 3:
-        day = "Tuesday";
-
+        return geenes.common.randomElement(this.fontFamilyGroups["sans-serif/sans-serif"].pairs, constructorFontFamily[0]);
 }
 
 

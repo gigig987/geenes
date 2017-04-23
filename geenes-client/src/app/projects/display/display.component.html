@@ -1,5 +1,7 @@
 <app-templates (selectTemplate)='onSelectTemplate($event)'></app-templates>
-<div *ngFor="let specimen of specimens; let i = index">
-  <div #styledSpecimen [innerHTML]="selectedTemplate?.content"></div>
+
+<div class="specimen" *ngFor="let specimen of specimens; let i = index">
+  <div  [innerHTML]="specimen?.content | safeHtml"></div>
   <!--<div [attr.data-index]="i" [innerHTML]="specimen.design.paragraph['font-size']"></div>-->
 </div>
+

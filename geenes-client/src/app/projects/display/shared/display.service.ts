@@ -36,5 +36,16 @@ export class DisplayService {
       .map((res:Response) => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error')); 
   }
+  getStyleByTemplateStringToHtml(template: string, genesArray: Array<number>):Observable<any> {
+    let headers    = new Headers({ 'Content-Type': 'application/json' }); 
+    let options    = new RequestOptions({ headers: headers }); 
+    let body = JSON.stringify({ 
+      "template": template, 
+      "genesArray": genesArray
+     });
+    return this.http.post('/api/stylist', body, options)
+      .map((res:Response) => res.json())
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error')); 
+  }
 
 }

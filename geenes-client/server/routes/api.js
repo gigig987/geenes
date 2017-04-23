@@ -136,9 +136,8 @@ router.get('/templates',(req,res)=> {
 router.post('/stylist',(req,res)=> {
        var template = req.body.template;
        var genesArray = req.body.genesArray;
-       console.log("Received data: " + JSON.stringify(req.body))
-//        console.log('API:' + template,genesArray);
-       res.json(gen.styleFromTemplateString(template, genesArray));
+//        console.log("Received data: " + JSON.stringify(req.body))
+       res.json(gen.styleFromTemplateStringToHtml(template, genesArray));
 })
 
 
