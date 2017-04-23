@@ -58,7 +58,7 @@ router.post('/projects', (req, res) => {
 // 
         for (var i = 0; i < 5; i++) { // !HARDCODED(5) number of specimen per project for now
                 genes[i] = gen.createGenes(20); // !HARDCODED(20) number of genes
-                design = gen.createDesign(genes[i]); 
+                // design = gen.createDesign(genes[i]); 
 
                 specimens[i] = {
                         _id: mongoose.Types.ObjectId(),
