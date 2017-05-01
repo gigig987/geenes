@@ -2,6 +2,7 @@
 
 <div class="specimen" *ngFor="let specimen of specimens; let i = index">
   <div  [innerHTML]="specimen?.content | safeHtml"></div>
+  <app-rating [id]='specimen._id'></app-rating>
   <!--<div [attr.data-index]="i" [innerHTML]="specimen.design.paragraph['font-size']"></div>-->
 </div>
 

@@ -16,6 +16,8 @@ import { DisplayComponent } from './projects/display/display.component';
 import { ProjectsService } from './projects/shared/projects.service';
 import { TemplatesService } from './projects/display/shared/templates.service';
 import { DisplayService } from './projects/display/shared/display.service';
+import { RatingComponent } from './projects/display/rating/rating.component';
+import { DraggableDirective } from './projects/display/shared/draggable.directive';
 
 
 
@@ -37,7 +39,9 @@ const ROUTES = [
     ProjectsComponent,
     TemplatesComponent,
     DisplayComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    RatingComponent,
+    DraggableDirective
   ],
   imports: [
     BrowserModule,

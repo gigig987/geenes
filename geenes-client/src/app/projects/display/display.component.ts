@@ -15,7 +15,6 @@ var WebFont = require('webfontloader');
   selector: 'app-display',
   templateUrl: './display.component.html',
   providers: [DisplayService],
-  // styles:[':host >>> div[data-index="1"] h1 {color:'+this.color+';}']
   styleUrls: ['./display.component.css']
 })
 
