@@ -13,9 +13,11 @@ import {
   AfterViewInit
 } from '@angular/core';
 import { SafeHtmlPipe } from '../../../shared/safeHTML.pipe';
+import {RatingService} from '../shared/rating.service';
 
 @Component({
   selector: 'app-rating',
+  providers: [RatingService],
   templateUrl: './rating.component.html',
   styleUrls: ['./rating.component.css']
 })
@@ -30,6 +32,7 @@ export class RatingComponent implements OnDestroy, OnInit, AfterViewInit {
 
   private dragging = false;
   public selectedRating: number = 0;
+  public errorMessage:any;
   private sliderPosition: number = 0;
   private handleDragOffset: number = 0;
   private facePaths: Array<any> = [];
@@ -59,8 +62,10 @@ export class RatingComponent implements OnDestroy, OnInit, AfterViewInit {
     this.canDrag = !!val;
   }
   private mustBePosition: Array<string> = ['absolute', 'fixed', 'relative'];
+
+
   constructor(
-    private el: ElementRef, private renderer: Renderer, private cdr: ChangeDetectorRef
+    private el: ElementRef, private renderer: Renderer, private cdr: ChangeDetectorRef, private ratingService: RatingService
   ) {
 
   }
@@ -194,6 +199,14 @@ export class RatingComponent implements OnDestroy, OnInit, AfterViewInit {
           }
           onComplete();
           this.selectedRating = rating;
+          //CALL THE SERVICE TO UPDATE ON DB
+          let fitnessFormula = 100 / (this.selectedRating + 1); // formula to be tested and tuned
+          this.ratingService.updateFitness(this.id,{fitness:fitnessFormula}) 
+            .subscribe( 
+              result => console.log(result),
+              error => this.errorMessage = <any>error
+              )
+
           this.cdr.detectChanges();
 
         }

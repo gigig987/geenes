@@ -12,11 +12,13 @@ import { AppComponent } from './app.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TemplatesComponent } from './projects/display/templates/templates.component';
 import { DisplayComponent } from './projects/display/display.component';
+import { RatingComponent } from './projects/display/rating/rating.component';
 
 import { ProjectsService } from './projects/shared/projects.service';
 import { TemplatesService } from './projects/display/shared/templates.service';
 import { DisplayService } from './projects/display/shared/display.service';
-import { RatingComponent } from './projects/display/rating/rating.component';
+import { RatingService } from './projects/display/shared/rating.service';
+
 import { DraggableDirective } from './projects/display/shared/draggable.directive';
 
 
