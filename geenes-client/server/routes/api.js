@@ -3,8 +3,8 @@ const router = express.Router();
 
 
 //core
-var project = require('../core/project.js');
-const gen = require('../core/test.js');
+const gen = require('../core/generation.js');
+const stylist = require('../core/stylist.js');
 
 // database
 // const MongoClient = require('mongodb').MongoClient;
@@ -63,7 +63,7 @@ router.post('/projects', (req, res) => {
 
                 specimens[i] = {
                         _id: mongoose.Types.ObjectId(),
-                        fitness: 1,
+                        fitness: 1, //TODO adjust to default value
                         dna: { genes: genes[i] },
                         design
                 }
@@ -110,8 +110,24 @@ router.get('/generation/:id', (req, res) => {
                 'generations._id generations.specimens.dna.genes generations.specimens._id generations.specimens.fitness',
                 (err, results) => {
                         if (err)
-                                res.status(500).send(err);
+                        res.status(500).send(err);
                         res.status(200).json(results.generations.id(req.params.id));
+                }
+        )
+
+});
+// generate new generation
+router.post('/generation/:id', (req, res) => {
+        Project.findOne({ 'generations._id': req.params.id },
+                'generations._id generations.specimens.dna.genes generations.specimens._id generations.specimens.fitness',
+                (err, results) => {
+                        if (err)
+                        res.status(500).send(err);
+                        let generation = results.generations.id(req.params.id);
+                        gen.setSpecimens(generation.specimens);
+                        gen.selection();
+                        let obj = gen.reproduction(generation.specimens);
+                        res.status(200).json(obj);
                 }
         )
 
@@ -126,7 +142,7 @@ router.get('/specimen/:id', (req, res) => {
                 }
         )
 });
-// get all info about a specimen
+// save fitness into specimen
 router.put('/specimen/:id/fitness', (req, res) => {
 
         var id = req.params.id;
@@ -177,7 +193,7 @@ router.post('/stylist', (req, res) => {
         var template = req.body.template;
         var genesArray = req.body.genesArray;
         //        console.log("Received data: " + JSON.stringify(req.body))
-        res.json(gen.styleFromTemplateStringToHtml(template, genesArray));
+        res.json(stylist.styleFromTemplateStringToHtml(template, genesArray));
 })
 
 
