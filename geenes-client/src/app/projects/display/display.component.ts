@@ -34,7 +34,7 @@ export class DisplayComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private displayService: DisplayService,
-  ) {     //CALL to Api generations
+  ) {    
 
   }
 
@@ -46,7 +46,7 @@ export class DisplayComponent implements OnInit {
         this.specimens.forEach(specimen => {
           genesArray.push(specimen.dna.genes);
         });
-        console.log(genesArray);
+        console.log(result);
         this.getStyle(genesArray);
       });
   }
@@ -92,6 +92,7 @@ export class DisplayComponent implements OnInit {
     this.selectedTemplate = template;
     this.sub = this.route.params.subscribe(params => {
       let gId = params['g_id'];
+      console.log(gId);
       let pId = params['p_id'];
       this.getGeneration(gId);
     });

@@ -200,7 +200,7 @@ export class RatingComponent implements OnDestroy, OnInit, AfterViewInit {
           onComplete();
           this.selectedRating = rating;
           //CALL THE SERVICE TO UPDATE ON DB
-          let fitnessFormula = 100 / (this.selectedRating * 5 + 1); // formula to be tested and tuned
+          let fitnessFormula = 100 / (this.selectedRating * 2 + 1); // TODO formula to be tested and tuned
           this.ratingService.updateFitness(this.id,{fitness:fitnessFormula}) 
             .subscribe( 
               result => console.log(result),

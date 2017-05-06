@@ -14,7 +14,7 @@ var projectSchema = new Schema({
                         _id: ObjectId,
                         fitness: Number,
                         dna: { genes: Array  }, 
-                        design: Object                
+                          
                         }]
     }]
            

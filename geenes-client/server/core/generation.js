@@ -99,11 +99,14 @@ function selection() {
       }
     }
     return record;
+    
   }
  exports.getMaxFitness = getMaxFitness;
 
  // Making the next generation
 function reproduction() {
+      console.log(specimens[1].dna.genes);
+          var newSpecimens = new Array(specimens.length);
   // Refill the specimens with children from the mating pool
   for (var i = 0; i < specimens.length; i++) {
     // Sping the wheel of fortune to pick two parents
@@ -118,18 +121,19 @@ function reproduction() {
     // Mate their genes
     var child = crossover(momgenes, dadgenes);
     // Mutate their genes
-    // child.mutate(this.mutationRate);
+    child = mutate(0.1, child);
     // Fill the new specimens with the new child
-    // this.specimens[i] = new Face(child, 50 + i * 75, 60);
+    newSpecimens[i]= child ;
   }
-  // this.generations++;
-  return child;
+      console.log(newSpecimens);
+  return newSpecimens;
 }
 
  exports.reproduction = reproduction;
 
  function setSpecimens(s){
     specimens = s;
+   
  }
 
  exports.setSpecimens = setSpecimens;
@@ -139,7 +143,6 @@ function reproduction() {
   function crossover(mom, dad) {
     var child = new Array(mom.length);
     var crossover = Math.floor(Math.random() * mom.length);
-    console.log(crossover+'////'+ mom.length);
     for (var i = 0; i < mom.length; i++) {
       if (i > crossover) child[i] = mom[i];
       else               child[i] = dad[i];
@@ -148,12 +151,13 @@ function reproduction() {
   }
   
   // Based on a mutation probability, picks a new Math.random character in array spots
-  function mutate(m) {
-    for (var i = 0; i < this.genes.length; i++) {
+  function mutate(m, genes) {
+    for (var i = 0; i < genes.length; i++) {
       if (Math.random(1) < m) {
-         this.genes[i] = Math.random();
+         genes[i] = Math.random();
       }
     }
+    return genes;
   }
 
 

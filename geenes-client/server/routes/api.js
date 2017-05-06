@@ -14,7 +14,6 @@ var Project = require('../models/project.js');
 var Specimen = require('../models/specimen.js');
 var Template = require('../models/templates.js');
 
-// mongoose.connect('mongodb://gigig:zxas12@ds035059.mlab.com:35059/geenes');
 mongoose.connect('mongodb://' + process.env.MONGO_USER + ':' + process.env.MONGO_PASSWORD + '@ds035059.mlab.com:35059/geenes');
 
 var db = mongoose.connection;
@@ -64,8 +63,7 @@ router.post('/projects', (req, res) => {
                 specimens[i] = {
                         _id: mongoose.Types.ObjectId(),
                         fitness: 1, //TODO adjust to default value
-                        dna: { genes: genes[i] },
-                        design
+                        dna: { genes: genes[i] }
                 }
         }
         //      
@@ -110,24 +108,41 @@ router.get('/generation/:id', (req, res) => {
                 'generations._id generations.specimens.dna.genes generations.specimens._id generations.specimens.fitness',
                 (err, results) => {
                         if (err)
-                        res.status(500).send(err);
+                                res.status(500).send(err);
                         res.status(200).json(results.generations.id(req.params.id));
                 }
         )
 
 });
-// generate new generation
+// create new generation
 router.post('/generation/:id', (req, res) => {
         Project.findOne({ 'generations._id': req.params.id },
                 'generations._id generations.specimens.dna.genes generations.specimens._id generations.specimens.fitness',
                 (err, results) => {
                         if (err)
-                        res.status(500).send(err);
+                                res.status(500).send(err);
+
                         let generation = results.generations.id(req.params.id);
                         gen.setSpecimens(generation.specimens);
                         gen.selection();
-                        let obj = gen.reproduction(generation.specimens);
-                        res.status(200).json(obj);
+                        let obj = gen.reproduction();
+                        let newspecimens = [];
+                        for (let i = 0; i < obj.length; i++) {
+                                newspecimens[i] = {
+                                        _id: mongoose.Types.ObjectId(),
+                                        fitness: 1, //TODO adjust to default value
+                                        dna: { genes: obj[i] }
+                                }
+                        }
+
+                       
+                        results.generations.push({specimens: newspecimens});
+                        results.save((err, updatedProject) => {
+                                if (err)
+                                        res.status(500).send(err);
+
+                                res.status(200).json(" succesfully saved");
+                        });
                 }
         )
 
@@ -150,25 +165,25 @@ router.put('/specimen/:id/fitness', (req, res) => {
         Project.findOne({ 'generations.specimens._id': req.params.id }, (err, results) => {
                 if (err)
                         res.status(500).send(err);
-                   
-                  specimen =   results.generations[0].specimens.id(req.params.id)    
-                  console.log(specimen);      
+
+                specimen = results.generations[0].specimens.id(req.params.id)
+                console.log(specimen);
                 // Render not found error
-                if (!results || !specimen ) {
+                if (!results || !specimen) {
                         return res.status(404).json({
                                 message: 'specimens with id ' + id + ' can not be found.'
                         });
                 }
                 specimen.fitness = req.body.fitness;
-                results.save((err, updatedProject)=>{
+                results.save((err, updatedProject) => {
                         if (err)
                                 res.status(500).send(err);
 
-                                res.status(200).json(" succesfully saved");
+                        res.status(200).json(" succesfully saved");
                 });
 
-               
-               
+
+
         });
 });
 
