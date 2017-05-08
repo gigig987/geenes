@@ -135,8 +135,8 @@ router.post('/generation/:id', (req, res) => {
                                 }
                         }
 
-                       
-                        results.generations.push({specimens: newspecimens});
+
+                        results.generations.push({ specimens: newspecimens });
                         results.save((err, updatedProject) => {
                                 if (err)
                                         res.status(500).send(err);
@@ -147,45 +147,87 @@ router.post('/generation/:id', (req, res) => {
         )
 
 });
+
 // get all info about a specimen
 router.get('/specimen/:id', (req, res) => {
-        Project.findOne({ 'generations.specimens._id': req.params.id },
+        var id = req.params.id;
+        Project.aggregate([
+                { $unwind: '$generations' },
+                {
+                        $match:
+                        { "generations.specimens._id": new mongoose.Types.ObjectId(id) }
+                },
+                { $unwind: '$generations.specimens' },
+                {
+                        "$group": {
+                                "_id": {
+                                        "_id": "$_id",
+                                },
+
+                                "specimens": { "$push": "$generations.specimens" }
+                        }
+                },
+
+        ],
                 (err, results) => {
+                        console.log(results);
+                        if (!results || results.length == 0) {
+                                return res.status(404).json({
+                                        message: 'specimens with id ' + id + ' can not be found.'
+                                });
+                        }
                         if (err)
                                 res.status(500).send(err);
-                        res.status(200).json(results.generations[0].specimens.id(req.params.id));
+
+                        res.status(200).json(results[0].specimens.filter(e => { return e._id == id }));
                 }
         )
 });
-// save fitness into specimen
+// save fitness into specimen FIXME this works but it's kinda hacky
 router.put('/specimen/:id/fitness', (req, res) => {
-
         var id = req.params.id;
+        Project.aggregate([
+                { $unwind: '$generations' },
+                {
+                        $match:
+                        { "generations.specimens._id": new mongoose.Types.ObjectId(id) }
+                },
+                { $unwind: '$generations.specimens' },
+                {
+                        "$group": {
+                                "_id": {
+                                        "_id": "$_id",
+                                },
 
-        Project.findOne({ 'generations.specimens._id': req.params.id }, (err, results) => {
-                if (err)
-                        res.status(500).send(err);
+                                "specimens": { "$push": "$generations.specimens" }
+                        }
+                },
 
-                specimen = results.generations[0].specimens.id(req.params.id)
-                console.log(specimen);
-                // Render not found error
-                if (!results || !specimen) {
-                        return res.status(404).json({
-                                message: 'specimens with id ' + id + ' can not be found.'
-                        });
-                }
-                specimen.fitness = req.body.fitness;
-                results.save((err, updatedProject) => {
+        ],
+                (err, results) => {
+                        console.log(results);
+                        if (!results || results.length == 0) {
+                                return res.status(404).json({
+                                        message: 'specimens with id ' + id + ' can not be found.'
+                                });
+                        }
                         if (err)
                                 res.status(500).send(err);
 
-                        res.status(200).json(" succesfully saved");
-                });
+                        var sID = 'generations.0.specimens.' + results[0].specimens.findIndex(e => { return e._id == id }) + '.fitness';
+                        var setter = {};
+                        setter[sID] = req.body.fitness;
+                        Project.update({ 'generations.specimens._id': id }, { "$set": setter },
+                                (err, updatedProject) => {
+                                        if (err)
+                                                res.status(500).send(err);
 
-
-
-        });
+                                        res.status(200).json("succesfully saved " + updatedProject);
+                                });
+                }
+        )
 });
+
 
 router.post('/templates', (req, res) => {
         var name = req.body.name;
