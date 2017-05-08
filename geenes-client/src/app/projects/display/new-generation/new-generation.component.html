@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <h3>
+      Create new generation</h3>
+    <form [formGroup]="myForm" novalidate (ngSubmit)="createProject(myForm.value, myForm.valid)">
+      <div>
+        <label>Mutation rate: {{_currentRange}}</label>
+        <input type="range" step="0.01" min="0.01" max="0.5" defaultValue="0.1" (change)="onChange($event.target.value)" formControlName="mRate">
+      </div>
+      <button type="submit" [disabled]="!myForm.valid">Create new generation</button>
+
+    </form>
+
+  </div>
+</div>

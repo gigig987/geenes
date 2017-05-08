@@ -13,13 +13,17 @@ import { ProjectsComponent } from './projects/projects.component';
 import { TemplatesComponent } from './projects/display/templates/templates.component';
 import { DisplayComponent } from './projects/display/display.component';
 import { RatingComponent } from './projects/display/rating/rating.component';
+import { NewGenerationComponent } from './projects/display/new-generation/new-generation.component';
 
 import { ProjectsService } from './projects/shared/projects.service';
 import { TemplatesService } from './projects/display/shared/templates.service';
 import { DisplayService } from './projects/display/shared/display.service';
 import { RatingService } from './projects/display/shared/rating.service';
+import { NewGenerationService } from './projects/display/shared/new-generation.service';
 
 import { DraggableDirective } from './projects/display/shared/draggable.directive';
+
+
 
 
 
@@ -43,7 +47,8 @@ const ROUTES = [
     DisplayComponent,
     SafeHtmlPipe,
     RatingComponent,
-    DraggableDirective
+    DraggableDirective,
+    NewGenerationComponent
   ],
   imports: [
     BrowserModule,

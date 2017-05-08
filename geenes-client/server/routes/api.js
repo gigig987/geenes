@@ -141,7 +141,10 @@ router.post('/generation/:id', (req, res) => {
                                 if (err)
                                         res.status(500).send(err);
 
-                                res.status(200).json(" succesfully saved");
+                                res.status(200).json(
+                                        {'message':" succesfully saved",
+                                        'newGenerationID':updatedProject.generations[updatedProject.generations.length-1]._id
+                                                                        });
                         });
                 }
         )

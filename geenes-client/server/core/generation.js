@@ -104,7 +104,7 @@ function selection() {
  exports.getMaxFitness = getMaxFitness;
 
  // Making the next generation
-function reproduction() {
+function reproduction(mrate) {
       console.log(specimens[1].dna.genes);
           var newSpecimens = new Array(specimens.length);
   // Refill the specimens with children from the mating pool
@@ -121,7 +121,7 @@ function reproduction() {
     // Mate their genes
     var child = crossover(momgenes, dadgenes);
     // Mutate their genes
-    child = mutate(0.1, child);
+    child = mutate(mrate, child);
     // Fill the new specimens with the new child
     newSpecimens[i]= child ;
   }

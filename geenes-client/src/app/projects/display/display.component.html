@@ -1,4 +1,5 @@
 <app-templates (selectTemplate)='onSelectTemplate($event)'></app-templates>
+<app-new-generation [id]='gId'></app-new-generation>
 
 <div class="specimen" *ngFor="let specimen of specimens; let i = index">
   <div  [innerHTML]="specimen?.content | safeHtml"></div>

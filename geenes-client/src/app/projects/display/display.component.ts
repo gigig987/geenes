@@ -28,7 +28,7 @@ export class DisplayComponent implements OnInit {
   public specimens = [];
   public fonts: Array<string>;
   public selectedTemplate: Template;
-  private gId;
+  public gId;
 
 
   constructor(
@@ -80,6 +80,13 @@ export class DisplayComponent implements OnInit {
 
   ngOnInit() {
 
+        this.sub = this.route.params.subscribe(params => {
+      this.gId = params['g_id'];
+      console.log(this.gId);
+      let pId = params['p_id'];
+      // this.getGeneration(this.gId);
+    });
+
   }
 
 
@@ -90,12 +97,7 @@ export class DisplayComponent implements OnInit {
 
   onSelectTemplate(template: Template): void {
     this.selectedTemplate = template;
-    this.sub = this.route.params.subscribe(params => {
-      let gId = params['g_id'];
-      console.log(gId);
-      let pId = params['p_id'];
-      this.getGeneration(gId);
-    });
+    this.getGeneration(this.gId);
 
   }
 
