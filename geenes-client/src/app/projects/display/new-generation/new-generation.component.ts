@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+ import {Router,ActivatedRoute} from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import {NewGenerationService} from '../shared/new-generation.service';
 
@@ -17,7 +18,12 @@ export class NewGenerationComponent implements OnInit {
   public submitted: boolean; // keep track on whether form is submitted
   public _currentRange: number = 0.05;
 
-  constructor(private _fb: FormBuilder, private NewGenerationService: NewGenerationService) { }
+  constructor
+  (private _fb: FormBuilder,
+   private NewGenerationService: NewGenerationService,
+   private _router:Router,
+   private r:ActivatedRoute
+   ) { }
 
   ngOnInit() {
          // form
@@ -34,7 +40,8 @@ export class NewGenerationComponent implements OnInit {
         this.submitted = true;
         //CALL API
         this.NewGenerationService.createNewGeneration(mRate, this.id).subscribe(res =>{
-          console.log(res);
+          console.log(res.newGenerationID);
+          this._router.navigate(["../"+res.newGenerationID], { relativeTo: this.r });
         });
     }
 

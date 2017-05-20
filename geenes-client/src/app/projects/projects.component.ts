@@ -15,7 +15,6 @@ export class ProjectsComponent implements OnInit {
   projects: any = [];
   public myForm: FormGroup; // our model driven form
   public submitted: boolean; // keep track on whether form is submitted
-  public _currentRange: number = 0.05;
   public _projectGenerations: number;
   public selected: boolean;
   public prevSelected: boolean;
@@ -27,7 +26,6 @@ export class ProjectsComponent implements OnInit {
         // form
     this.myForm = this._fb.group({
             name: ['', [<any>Validators.required, <any>Validators.minLength(3)]],
-            mRate: [this._currentRange, [<any>Validators.required]]
         });
   }
 
@@ -45,9 +43,6 @@ export class ProjectsComponent implements OnInit {
         });
     }
 
-  onChange(value:number):void {
-    this._currentRange = value;
-  }
 
   selectGen(id):void{
   this.router.navigate(['/projects', {outlets: {'display': [id]}}]);

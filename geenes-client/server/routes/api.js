@@ -72,7 +72,6 @@ router.post('/projects', (req, res) => {
         var obj = {
                 _id: mongoose.Types.ObjectId(),
                 name: req.body.name,
-                mutationRate: req.body.mRate,
                 numberOfGenerations: numberOfGenerations,
                 generations: [{
                         specimens: specimens

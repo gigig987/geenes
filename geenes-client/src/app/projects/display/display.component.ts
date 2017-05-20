@@ -34,7 +34,7 @@ export class DisplayComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private displayService: DisplayService,
-  ) {    
+  ) {
 
   }
 
@@ -57,14 +57,14 @@ export class DisplayComponent implements OnInit {
         this.specimens.forEach((specimen, i) => {
           specimen.content = res[i].html;
           this.fonts.push(res[i].fonts);
-         
-          
+
+
         });
         console.log(this.fonts);
-         var flattened = this.fonts.reduce(function (a, b) {
-            return a.concat(b);
-          });
-          console.log(flattened);
+        var flattened = this.fonts.reduce(function (a, b) {
+          return a.concat(b);
+        });
+        console.log(flattened);
         WebFont.load({
           google: {
             families: flattened
@@ -78,16 +78,7 @@ export class DisplayComponent implements OnInit {
 
 
 
-  ngOnInit() {
-
-        this.sub = this.route.params.subscribe(params => {
-      this.gId = params['g_id'];
-      console.log(this.gId);
-      let pId = params['p_id'];
-      // this.getGeneration(this.gId);
-    });
-
-  }
+  ngOnInit() {}
 
 
   ngOnDestroy() {
@@ -97,7 +88,13 @@ export class DisplayComponent implements OnInit {
 
   onSelectTemplate(template: Template): void {
     this.selectedTemplate = template;
-    this.getGeneration(this.gId);
+        this.sub = this.route.params.subscribe(params => {
+      this.gId = params['g_id'];
+      console.log(this.gId);
+      let pId = params['p_id'];
+      this.getGeneration(this.gId);
+    });
+    
 
   }
 
