@@ -7,6 +7,7 @@ const dotenv = require('dotenv').config();
 
 // Get our API routes
 const api = require('./server/routes/api');
+const users = require('./server/controllers/users.controller');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set our api routes
 app.use('/api', api);
+app.use('/api/users', users);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
