@@ -169,7 +169,7 @@ function _delete(_id) {
     var deferred = Q.defer();
  
     User.remove(
-        { _id: mongo.helper.toObjectID(_id) },
+        { _id: mongoose.Types.ObjectId(_id) },
          (err) => {
             if (err) deferred.reject(err.name + ': ' + err.message);
  

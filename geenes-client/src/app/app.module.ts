@@ -21,6 +21,9 @@ import { DisplayService } from './projects/display/shared/display.service';
 import { RatingService } from './projects/display/shared/rating.service';
 import { NewGenerationService } from './projects/display/shared/new-generation.service';
 
+import {UserService} from './_services/user.service';
+import {AuthenticationService} from './_services/authentication.service';
+
 import { DraggableDirective } from './projects/display/shared/draggable.directive';
 
 
@@ -58,7 +61,7 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES),
     AccordionModule.forRoot()
   ],
-  providers: [ProjectsService,TemplatesService, DisplayService], 
+  providers: [ProjectsService,TemplatesService, DisplayService,AuthenticationService,UserService], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }
