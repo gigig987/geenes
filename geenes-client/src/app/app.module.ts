@@ -21,10 +21,13 @@ import { DisplayService } from './projects/display/shared/display.service';
 import { RatingService } from './projects/display/shared/rating.service';
 import { NewGenerationService } from './projects/display/shared/new-generation.service';
 
-import {UserService} from './_services/user.service';
-import {AuthenticationService} from './_services/authentication.service';
+import { UserService } from './_services/user.service';
+import { AuthenticationService } from './_services/authentication.service';
+import { AlertService } from './_services/alert.service';
 
 import { DraggableDirective } from './projects/display/shared/draggable.directive';
+import { RegisterComponent } from './register/register.component';
+import { AlertComponent } from './_directives/alert.component';
 
 
 
@@ -38,8 +41,9 @@ const ROUTES = [
     redirectTo: 'projects',
     pathMatch: 'full'
   },
-    {path: 'projects',component: ProjectsComponent, },
-    { path: 'project/:p_id/:g_id', component: DisplayComponent }
+  { path: 'projects', component: ProjectsComponent, },
+  { path: 'project/:p_id/:g_id', component: DisplayComponent },
+  { path: 'register', component: RegisterComponent }
 ];
 
 @NgModule({
@@ -51,7 +55,9 @@ const ROUTES = [
     SafeHtmlPipe,
     RatingComponent,
     DraggableDirective,
-    NewGenerationComponent
+    NewGenerationComponent,
+    RegisterComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +67,14 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES),
     AccordionModule.forRoot()
   ],
-  providers: [ProjectsService,TemplatesService, DisplayService,AuthenticationService,UserService], 
+  providers: [
+    ProjectsService,
+    TemplatesService, 
+    DisplayService, 
+    AuthenticationService, 
+    UserService, 
+    AlertService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
