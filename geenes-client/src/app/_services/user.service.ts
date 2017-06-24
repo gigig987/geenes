@@ -6,36 +6,30 @@ import { User } from '../_models/user.model';
  
 @Injectable()
 export class UserService {
+    domain = 'http://localhost:3000/'
     constructor(private http: Http) { }
  
     getAll() {
-        return this.http.get('api/users', this.jwt()).map((response: Response) => response.json());
+        return this.http.get(this.domain + 'api/users').map((response: Response) => response.json());
     }
  
     getById(_id: string) {
-        return this.http.get('api/users/' + _id, this.jwt()).map((response: Response) => response.json());
+        return this.http.get(this.domain + 'api/users/' + _id).map((response: Response) => response.json());
+    }
+
+    getCurrent() {
+        return this.http.get(this.domain + 'api/users/current').map((response: Response) => response.json());
     }
  
     create(user: User) {
-        return this.http.post('api/users/register', user, this.jwt());
+        return this.http.post(this.domain + 'api/users/register', user);
     }
  
     update(user: User) {
-        return this.http.put('api/users/' + user._id, user, this.jwt());
+        return this.http.put(this.domain + 'api/users/' + user._id, user);
     }
  
     delete(_id: string) {
-        return this.http.delete('api/users/' + _id, this.jwt());
-    }
- 
-    // private helper methods
- 
-    private jwt() {
-        // create authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
-            let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
-            return new RequestOptions({ headers: headers });
-        }
+        return this.http.delete(this.domain + 'api/users/' + _id);
     }
 }

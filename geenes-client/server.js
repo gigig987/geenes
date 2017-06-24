@@ -4,6 +4,7 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv').config();
+const expressJwt = require('express-jwt');
 
 // Get our API routes
 const api = require('./server/routes/api');
@@ -17,6 +18,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
+
+// use JWT auth to secure the api, the token can be passed in the authorization header or querystring
+app.use(expressJwt({
+    secret: process.env.SECRET,
+    getToken: function (req) {
+        if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+           let a = req.headers.authorization.split(' ')[1];
+           console.log(a);
+            return req.headers.authorization.split(' ')[1];
+        } else if (req.query && req.query.token) {
+            return req.query.token;
+        }
+        return null;
+    }
+}).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
+
 
 // Set our api routes
 app.use('/api', api);

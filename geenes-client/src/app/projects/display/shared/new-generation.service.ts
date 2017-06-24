@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class NewGenerationService {
-
+  domain = 'http://localhost:3000/'
   constructor(private http: Http) { }
 
     // call the stylist API
@@ -14,7 +14,7 @@ export class NewGenerationService {
     let body = JSON.stringify({ 
       "mRate": mRate
      });
-    return this.http.post('/api/generation/'+id, body, options)
+    return this.http.post(this.domain + 'api/generation/'+id, body, options)
       .map((res:Response) => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error')); 
   }

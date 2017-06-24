@@ -31,7 +31,7 @@ function authenticate(username, password) {
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                token: jwt.sign({ sub: user._id }, process.env.SECRET)
+                token: jwt.sign({ sub: user._id }, process.env.SECRET,{ expiresIn: '24h' })
             });
         } else {
             // authentication failed

@@ -1,0 +1,7 @@
+<h2 class="page-header">Profile</h2>
+<div>
+  <ul class="list-group">
+    <li class="list-group-item">{{ user?.username }}</li>
+    <li class="list-group-item" ng-if="user?.firstName && user?.lastName">{{ user?.firstName}} {{user?.lastName}}</li>
+  </ul>
+</div>

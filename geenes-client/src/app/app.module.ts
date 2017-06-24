@@ -24,10 +24,15 @@ import { NewGenerationService } from './projects/display/shared/new-generation.s
 import { UserService } from './_services/user.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { AlertService } from './_services/alert.service';
+import { customHttpProvider } from './shared/custom-http';
 
 import { DraggableDirective } from './projects/display/shared/draggable.directive';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './_guards/auth.guard';
 import { AlertComponent } from './_directives/alert.component';
+import { LoginComponent } from './login/login.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -41,9 +46,11 @@ const ROUTES = [
     redirectTo: 'projects',
     pathMatch: 'full'
   },
-  { path: 'projects', component: ProjectsComponent, },
-  { path: 'project/:p_id/:g_id', component: DisplayComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]  },
+  // { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard]  },
+  // { path: 'project/:p_id/:g_id', component: DisplayComponent, canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
@@ -57,7 +64,10 @@ const ROUTES = [
     DraggableDirective,
     NewGenerationComponent,
     RegisterComponent,
-    AlertComponent
+    AlertComponent,
+    LoginComponent,
+    NavbarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -68,12 +78,15 @@ const ROUTES = [
     AccordionModule.forRoot()
   ],
   providers: [
+    customHttpProvider,
     ProjectsService,
     TemplatesService, 
     DisplayService, 
     AuthenticationService, 
     UserService, 
-    AlertService
+    AlertService,
+    AuthGuard,
+    
   ],
   bootstrap: [AppComponent]
 })

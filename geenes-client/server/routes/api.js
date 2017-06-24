@@ -72,6 +72,7 @@ router.post('/projects', (req, res) => {
         var obj = {
                 _id: mongoose.Types.ObjectId(),
                 name: req.body.name,
+                userId: req.body.userId,
                 numberOfGenerations: numberOfGenerations,
                 generations: [{
                         specimens: specimens
@@ -141,9 +142,10 @@ router.post('/generation/:id', (req, res) => {
                                         res.status(500).send(err);
 
                                 res.status(200).json(
-                                        {'message':" succesfully saved",
-                                        'newGenerationID':updatedProject.generations[updatedProject.generations.length-1]._id
-                                                                        });
+                                        {
+                                                'message': " succesfully saved",
+                                                'newGenerationID': updatedProject.generations[updatedProject.generations.length - 1]._id
+                                        });
                         });
                 }
         )
@@ -254,6 +256,5 @@ router.post('/stylist', (req, res) => {
         //        console.log("Received data: " + JSON.stringify(req.body))
         res.json(stylist.styleFromTemplateStringToHtml(template, genesArray));
 })
-
 
 module.exports = router;

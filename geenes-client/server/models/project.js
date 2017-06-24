@@ -8,6 +8,7 @@ var mongoose = require('mongoose')
 
 var projectSchema = new Schema({
     _id: ObjectId,
+    userId:ObjectId,
     name: { type: String, required: true },
     mutationRate: {type: Number, default:0.05, required: true},
     numberOfGenerations: {type: Number, default:1},

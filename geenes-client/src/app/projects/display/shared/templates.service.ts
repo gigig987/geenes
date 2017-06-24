@@ -8,11 +8,11 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class TemplatesService {
-
+  domain = 'http://localhost:3000/'
   constructor(private http: Http) { }
   // Get all templates from the API
   getAllTemplates() {
-    return this.http.get('/api/templates')
+    return this.http.get(this.domain + 'api/templates')
       .map(res => res.json());
   }
   
