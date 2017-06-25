@@ -5,8 +5,9 @@ var geenes = require('./libraries');
 // Create the specimens
 class Project {
 
-  constructor(name, m, num) {
-    this.projectName = name; //project name 
+  constructor(name, m, userId, num) {
+    this.projectName = name; //project name
+    this.userId = userId; // the owner of the project 
     this.mutationRate = m; // Mutation rate
     this.specimens = [];  // array to hold the current specimens
     this.matingPool = [];

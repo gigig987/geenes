@@ -26,7 +26,7 @@ db.once('open', function () {
 
 // Get all projects
 router.get('/projects', (req, res) => {
-        Project.find({}, '_id name numberOfGenerations generations._id mutationRate', (err, results) => {
+        Project.find({'userId':req.user.sub}, '_id name numberOfGenerations generations._id mutationRate', (err, results) => {
                 if (err)
                         res.status(500).send(err);
                 res.status(200).json(results);
@@ -72,12 +72,13 @@ router.post('/projects', (req, res) => {
         var obj = {
                 _id: mongoose.Types.ObjectId(),
                 name: req.body.name,
-                userId: req.body.userId,
+                userId: mongoose.Types.ObjectId(req.user.sub),
                 numberOfGenerations: numberOfGenerations,
                 generations: [{
                         specimens: specimens
                 }]
         }
+        console.log(obj)
         // ACTUAL CODE TO SAVE THE NEW CREATED PROJECT INTO DB
         new Project(obj).save(err => {
                 if (err) {

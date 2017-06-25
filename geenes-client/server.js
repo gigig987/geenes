@@ -24,8 +24,6 @@ app.use(expressJwt({
     secret: process.env.SECRET,
     getToken: function (req) {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-           let a = req.headers.authorization.split(' ')[1];
-           console.log(a);
             return req.headers.authorization.split(' ')[1];
         } else if (req.query && req.query.token) {
             return req.query.token;

@@ -47,8 +47,8 @@ const ROUTES = [
     pathMatch: 'full'
   },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]  },
-  // { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard]  },
-  // { path: 'project/:p_id/:g_id', component: DisplayComponent, canActivate: [AuthGuard] },
+  { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard]  },
+  { path: 'project/:p_id/:g_id', component: DisplayComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent }
 ];
