@@ -28,6 +28,7 @@ import { customHttpProvider } from './shared/custom-http';
 
 import { DraggableDirective } from './projects/display/shared/draggable.directive';
 import { RegisterComponent } from './register/register.component';
+import { StrengthBar } from './register/strenghtBar.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AlertComponent } from './_directives/alert.component';
 import { LoginComponent } from './login/login.component';
@@ -64,10 +65,11 @@ const ROUTES = [
     DraggableDirective,
     NewGenerationComponent,
     RegisterComponent,
+    StrengthBar,
     AlertComponent,
     LoginComponent,
     NavbarComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

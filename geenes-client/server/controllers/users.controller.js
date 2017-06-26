@@ -8,6 +8,8 @@ router.post('/authenticate', authenticate);
 router.post('/register', register);
 router.get('/', getAll);
 router.get('/current', getCurrent);
+router.get('/check/:username', checkUsername);
+router.get('/check/email/:email', checkEmail);
 router.put('/:_id', update);
 router.delete('/:_id', _delete);
  
@@ -62,7 +64,27 @@ function getCurrent(req, res) {
             res.status(400).send(err);
         });
 }
- 
+
+function checkUsername(req, res) {
+    userService.checkUsername(req.params.username)
+         .then((data) => {
+            res.send(data);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+}
+
+function checkEmail(req, res) {
+    userService.checkEmail(req.params.email)
+         .then((data) => {
+            res.send(data);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+}
+
 function update(req, res) {
     userService.update(req.params._id, req.body)
         .then( () =>{

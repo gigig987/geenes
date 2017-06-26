@@ -12,6 +12,8 @@ var service = {};
 service.authenticate = authenticate;
 service.getAll = getAll;
 service.getById = getById;
+service.checkUsername = checkUsername;
+service.checkEmail = checkEmail;
 service.create = create;
 service.update = update;
 service.delete = _delete;
@@ -40,6 +42,48 @@ function authenticate(username, password) {
     });
  
     return deferred.promise;
+}
+
+function checkUsername(username){
+     var deferred = Q.defer();
+     if(!username){
+         deferred.reject('input a username to check');
+     }else{
+       User.findOne(
+        { username: username },
+         (err, user) => {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+ 
+            if (user) {
+                // username already exists
+                deferred.resolve({success:false, message:'Username "' + username + '" is already taken'});
+            } else {
+                deferred.resolve({success:true, message:'Username available'});
+            }
+        });
+     }
+    return deferred.promise;    
+}
+
+function checkEmail(email){
+     var deferred = Q.defer();
+     if(!email){
+         deferred.reject('input an email address to check');
+     }else{
+       User.findOne(
+        { email: email },
+         (err, user) => {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+ 
+            if (user) {
+                // email already exists
+                deferred.resolve({success:false, message:'Email "' + email + '" is already taken'});
+            } else {
+                deferred.resolve({success:true, message:'Email available'});
+            }
+        });
+     }
+    return deferred.promise;    
 }
  
 function getAll() {
@@ -83,18 +127,22 @@ function create(userParam) {
     var deferred = Q.defer();
  
     // validation
-    User.findOne(
-        { username: userParam.username },
-         (err, user) => {
-            if (err) deferred.reject(err.name + ': ' + err.message);
+    if (this.checkUsername(userParam.username) ){
+        createUser();
+    }
+
+    // User.findOne(
+    //     { username: userParam.username },
+    //      (err, user) => {
+    //         if (err) deferred.reject(err.name + ': ' + err.message);
  
-            if (user) {
-                // username already exists
-                deferred.reject('Username "' + userParam.username + '" is already taken');
-            } else {
-                createUser();
-            }
-        });
+    //         if (user) {
+    //             // username already exists
+    //             deferred.reject('Username "' + userParam.username + '" is already taken');
+    //         } else {
+    //             createUser();
+    //         }
+    //     });
  
     function createUser() {
         // set user object to userParam without the cleartext password
@@ -121,7 +169,7 @@ function update(_id, userParam) {
         if (err) deferred.reject(err.name + ': ' + err.message);
  
         if (user.username !== userParam.username) {
-            // username has changed so check if the new username is already taken
+            // username has changed so check if the new username is already taken                
             User.findOne(
                 { username: userParam.username },
                  (err, user) =>{
@@ -129,7 +177,7 @@ function update(_id, userParam) {
  
                     if (user) {
                         // username already exists
-                        deferred.reject('Username "' + req.body.username + '" is already taken')
+                        deferred.reject('Username "' + userParam.username + '" is already taken')
                     } else {
                         updateUser();
                     }

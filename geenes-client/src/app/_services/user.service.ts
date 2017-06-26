@@ -20,6 +20,14 @@ export class UserService {
     getCurrent() {
         return this.http.get(this.domain + 'api/users/current').map((response: Response) => response.json());
     }
+
+    checkUsername(username:String) {
+        return this.http.get(this.domain + 'api/users/check/'+ username).map((response: Response) => response.json());
+    }
+
+    checkEmail(email:String) {
+        return this.http.get(this.domain + 'api/users/check/email/'+ email).map((response: Response) => response.json());
+    }
  
     create(user: User) {
         return this.http.post(this.domain + 'api/users/register', user);
