@@ -127,10 +127,6 @@ function create(userParam) {
     var deferred = Q.defer();
  
     // validation
-    if (this.checkUsername(userParam.username) ){
-        createUser();
-    }
-
     User.findOne(
         { username: userParam.username },
          (err, user) => {
