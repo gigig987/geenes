@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UserService } from '../_services/user.service';
+import { User } from '../_models/user.model';
 import { AlertService } from '../_services/alert.service';
 
 import { StrengthBar } from './strenghtBar.component';
@@ -13,7 +14,7 @@ import { StrengthBar } from './strenghtBar.component';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent{
-  model: any = {};
+  //user: User;
   loading = false;
   form: FormGroup;
   usernameMessage: string;
@@ -51,7 +52,6 @@ export class RegisterComponent{
         Validators.required, // Field is required
         Validators.minLength(8), // Minimum length is 8 characters
         Validators.maxLength(35), // Maximum length is 35 characters
-        this.validatePassword // Custom validation
       ])]
     });
   }
@@ -93,10 +93,12 @@ export class RegisterComponent{
 
   // Function to check if username is available
   checkUsername() {
+    if(!this.form.controls['username'].valid){
+      return null;
+    }
     // Function from authentication file to check if username is taken
     this.userService.checkUsername(this.form.get('username').value).subscribe(data => {
       // Check if success true or success false was returned from API
-      console.log(data)
       if (!data.success) {
         this.usernameValid = false; // Return username as invalid
         this.usernameMessage = data.message; // Return error message
@@ -111,7 +113,6 @@ export class RegisterComponent{
     if(!this.form.controls['email'].valid){
       return null;
     }
-    console.log(this.form.controls['email'].valid);
       // Function from authentication file to check if username is taken
       this.userService.checkEmail(this.form.get('email').value).subscribe(data => {
         // Check if success true or success false was returned from API
@@ -129,7 +130,14 @@ export class RegisterComponent{
 
   register() {
     this.loading = true;
-    this.userService.create(this.model)
+
+    const user = {
+      email: this.form.get('email').value, // E-mail input field
+      username: this.form.get('username').value, // Username input field
+      password: this.form.get('password').value // Password input field
+    }
+
+    this.userService.create(user)
       .subscribe(
       data => {
         this.alertService.success('Registration successful', true);

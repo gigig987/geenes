@@ -131,18 +131,18 @@ function create(userParam) {
         createUser();
     }
 
-    // User.findOne(
-    //     { username: userParam.username },
-    //      (err, user) => {
-    //         if (err) deferred.reject(err.name + ': ' + err.message);
+    User.findOne(
+        { username: userParam.username },
+         (err, user) => {
+            if (err) deferred.reject(err.name + ': ' + err.message);
  
-    //         if (user) {
-    //             // username already exists
-    //             deferred.reject('Username "' + userParam.username + '" is already taken');
-    //         } else {
-    //             createUser();
-    //         }
-    //     });
+            if (user) {
+                // username already exists
+                deferred.reject('Username "' + userParam.username + '" is already taken');
+            } else {
+                createUser();
+            }
+        });
  
     function createUser() {
         // set user object to userParam without the cleartext password

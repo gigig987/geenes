@@ -29,7 +29,7 @@ export class UserService {
         return this.http.get(this.domain + 'api/users/check/email/'+ email).map((response: Response) => response.json());
     }
  
-    create(user: User) {
+    create(user: any) {
         return this.http.post(this.domain + 'api/users/register', user);
     }
  
