@@ -143,7 +143,7 @@ function create(userParam) {
 
                         if (user) {
                             // Username already exists
-                            deferred.reject('Username "' + userParam.username + '" is already taken');
+                            deferred.reject({ success: false, message:'Username "' + userParam.username + '" is already taken'});
                         } else {
                             User.findOne(
                                 { email: userParam.email },
@@ -152,11 +152,11 @@ function create(userParam) {
 
                                     if (user) {
                                         // Email already exists
-                                        deferred.reject('Email "' + userParam.email + '" is already taken');
+                                        deferred.reject({ success: false, message:'Email "' + userParam.email + '" is already taken'});
                                     } else {
                                         // password length validation
                                         if(!passwordLengthChecker(userParam.password)){
-                                             deferred.reject('Password must be at least 8 characters but no more than 35');
+                                             deferred.reject({ success: false, message:'Password must be at least 8 characters but no more than 35'});
                                         }else{
                                         // finally create user
                                         createUser();
@@ -179,13 +179,13 @@ function create(userParam) {
             if (err) {
                 if (err.errors) {
                     if (err.errors.email) {
-                        deferred.reject(err.errors.email.message);
+                        deferred.reject({ success: false, message:err.errors.email.message});
                     } else {
                         if (err.errors.username) {
-                            deferred.reject(err.errors.username.message);
+                            deferred.reject({ success: false, message:err.errors.username.message});
                         } else {
                             if (err.errors.hash) {
-                                deferred.reject(err.errors.hash.message);
+                                deferred.reject({ success: false, message:err.errors.hash.message});
                             }
                         }
                     }
