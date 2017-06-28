@@ -100,16 +100,51 @@ function styleFromTemplateStringToHtml(template, genesArray) {
         }
 
       if ($('h1')) {
-        var obj = geenes.typography.typeSettings(3, baseFontSize, typeScaleRatio, baselineM, baseFontWeight, constrastIndex, constructorFontFamily);
+        var obj = geenes.typography.typeSettings(4, baseFontSize, typeScaleRatio, baselineM, baseFontWeight, constrastIndex, constructorFontFamily);
         Object.keys(obj).forEach(function (key) {
           $('h1').css(key, obj[key]);
           });
         }   
 
-      if ($('h3')) {
-        var obj = geenes.typography.typeSettings(2, baseFontSize, typeScaleRatio, baselineM, baseFontWeight, constrastIndex, constructorFontFamily);
+      if ($('h2')) {
+        var obj = geenes.typography.typeSettings(3, baseFontSize, typeScaleRatio, baselineM, baseFontWeight, constrastIndex, constructorFontFamily);
         Object.keys(obj).forEach(function (key) {
-          $('h3').css(key, obj[key]);
+          $('h2').css(key, obj[key]);
+          });
+        }   
+
+      if ($('h3')) {
+        if($('.text-display-2')){
+            var obj = geenes.typography.typeSettings(2.5, baseFontSize, typeScaleRatio, baselineM, fontWeightContrast, constrastIndex, constructorFontFamily);
+            Object.keys(obj).forEach(function (key) {
+              $('h3.text-display-2').css(key, obj[key]);
+            });
+        }else{
+          var obj = geenes.typography.typeSettings(2, baseFontSize, typeScaleRatio, baselineM, baseFontWeight, constrastIndex, constructorFontFamily);
+            Object.keys(obj).forEach(function (key) {
+              $('h3').css(key, obj[key]);
+            });
+        }
+      }  
+
+      if ($('h4')) {
+        var obj = geenes.typography.typeSettings(1, baseFontSize, typeScaleRatio, baselineM, baseFontWeight, constrastIndex, constructorFontFamily);
+        Object.keys(obj).forEach(function (key) {
+          $('h4').css(key, obj[key]);
+          });
+        }  
+
+      if ($('h5')) {
+        var obj = geenes.typography.typeSettings(0, baseFontSize, typeScaleRatio, baselineM, baseFontWeight, constrastIndex, constructorFontFamily);
+        Object.keys(obj).forEach(function (key) {
+          $('h5').css(key, obj[key]);
+          });
+        }   
+
+      if ($('h6')) {
+        var obj = geenes.typography.typeSettings(-1, baseFontSize, typeScaleRatio, baselineM, fontWeightContrast, constrastIndex, constructorFontFamily);
+        Object.keys(obj).forEach(function (key) {
+          $('h6').css(key, obj[key]);
           });
         }   
 
