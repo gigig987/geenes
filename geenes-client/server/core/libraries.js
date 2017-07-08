@@ -65,6 +65,14 @@ geenes.typography = {
 
     },
 
+    fontCategories: {
+        "0":"sans-serif",
+        "1":"serif",
+        "2":"display",
+        "3":"handwriting",
+        "4":"monospace"
+    },
+
     fontFamilyGroups:{
         "sans-serif/serif":{
             "index":0,"pairs":[ 

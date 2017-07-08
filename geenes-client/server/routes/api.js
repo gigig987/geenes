@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const request = require('request');
+var cheerio = require('cheerio');
 
 
 //core
@@ -257,5 +259,18 @@ router.post('/stylist', (req, res) => {
         //        console.log("Received data: " + JSON.stringify(req.body))
         res.json(stylist.styleFromTemplateStringToHtml(template, genesArray));
 })
+
+router.get('/scrape', (req,res)=>{
+        var url = 'https://fonts.google.com/specimen/Zilla+Slab';
+        request(url,(err, response, html)=>{
+                if(!err){
+                        var $ = cheerio.load(html);
+                                
+                                console.log($('.pairings-pair-header'))
+                }
+        })
+
+})
+
 
 module.exports = router;

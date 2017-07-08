@@ -30,7 +30,7 @@ app.use(expressJwt({
         }
         return null;
     }
-}).unless({ path: ['/api/users/authenticate', '/api/users/register', /\/api\/users\/check/i] }));
+}).unless({ path: ['/api/users/authenticate', '/api/users/register', '/api/scrape', /\/api\/users\/check/i] }));
 
 
 // Set our api routes
