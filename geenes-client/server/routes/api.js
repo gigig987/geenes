@@ -260,15 +260,8 @@ router.post('/stylist', (req, res) => {
         res.json(stylist.styleFromTemplateStringToHtml(template, genesArray));
 })
 
-router.get('/scrape', (req,res)=>{
-        var url = 'https://fonts.google.com/specimen/Zilla+Slab';
-        request(url,(err, response, html)=>{
-                if(!err){
-                        var $ = cheerio.load(html);
-                                
-                                console.log($('.pairings-pair-header'))
-                }
-        })
+router.post('/rand', (req,res)=>{
+       res.json(stylist.style(req.body.genesArray))
 
 })
 

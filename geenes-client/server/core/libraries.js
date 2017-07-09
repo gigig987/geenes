@@ -1,4 +1,4 @@
-
+var gfont = require('./libraries/google-fonts.js');
 // Namespaced library of functions common across multiple usages
 var geenes = geenes || {};
 
@@ -8,7 +8,35 @@ geenes.common = {
         var key = array[Math.floor(gene * array.length)];
         return obj[key]
 
-    }
+    },
+
+ randomShuffle: function (obj,seed){
+var array;
+var numbers = [];
+        if (obj instanceof Array){
+         array = obj;
+        console.log('it was an array')    
+       
+        }else{
+        array = Object.keys(obj).map(key => obj[key])
+        console.log('it was an object')
+        }
+        var size = array.length;
+		var rng = seed;
+		var resp = [];
+		var keys = [];
+
+		for(var i=0;i<size;i++) keys.push(i);
+		for(var i=0;i<size;i++){
+			var r =  Math.floor(seed * ((keys.length-1) - 0 + 1)) + 0;
+			var g = keys[r];
+			keys.splice(r,1);
+			resp.push(array[g]);
+		}
+		return resp;
+
+}
+
 };
 
 // Scales from http://modularscale.com/
@@ -73,141 +101,143 @@ geenes.typography = {
         "4":"monospace"
     },
 
-    fontFamilyGroups:{
-        "sans-serif/serif":{
-            "index":0,"pairs":[ 
-                                ["Cabin","Old Standard TT"  ],
-                                ["Fjalla One","Average"  ],
-                                ["Istok Web","Lora"  ],
-                                ["Josefin Sans","Playfair Display"  ],
-                                ["Lato","Merriweather"  ],
-                                ["Montserrat","Cardo"  ],
-                                ["Montserrat","Crimson Text"  ],
-                                ["Montserrat","Domine"  ],
-                                ["Montserrat","Neuton"  ],
-                                ["Montserrat","Playfair Display"  ],
-                                ["Muli","Playfair Display"  ],
-                                ["Nunito","Alegreya"  ],
-                                ["Nunito","Lora"  ],
-                                ["Open Sans","Gentium Book Basic"  ],
-                                ["Open Sans","Libre Baskerville"  ],
-                                ["Open Sans","Lora"  ],
-                                ["Open Sans","Playfair Display SC"  ],
-                                ["Oswald","Merriweather"  ],
-                                ["Oswald","Old Standard TT"  ],
-                                ["Oswald","Quattrocento"  ],
-                                ["PT Sans","PT Serif"  ],
-                                ["Quicksand","EB Garamond"  ],
-                                ["Raleway","Merriweather"  ],
-                                ["Ubuntu","Lora"  ]
-                            ]},
-        "serif/sans-serif":{
-            "index":1,"pairs":[ 
-                                ["Alegreya","Open Sans"  ],
-                                ["Alegreya","Source Sans Pro"  ],
-                                ["Bitter","Raleway"  ],
-                                ["Bree Serif","Open Sans"  ],
-                                ["Cantata One","Imprima"  ],
-                                ["Cardo","Josefin Sans"  ],
-                                ["Crete Round","AbeeZee"  ],
-                                ["Josefin Slab","Josefinsans"  ],
-                                ["Kreon","Ubuntu"  ],
-                                ["Libre Baskerville","Montserrat"  ],
-                                ["Libre Baskerville","Open Sans"  ],
-                                ["Lora","Source Sans Pro"  ],
-                                ["Lustria","Lato"  ],
-                                ["Merriweather","Open Sans"  ],
-                                ["Merriweather","Source Sans Pro"  ],
-                                ["Old Standard TT","Questrial"  ],
-                                ["Ovo","Muli"  ],
-                                ["Playfair Display","Open Sans"  ],
-                                ["PT Serif","Open Sans"  ],
-                                ["Quattrocento","Quattrocento Sans"  ],
-                                ["Roboto Slab","Open Sans"  ],
-                                ["Roboto Slab","Roboto"  ],
-                                ["Rokkitt","Roboto"  ],
-                                ["Rokkitt","Ubuntu"  ],
-                                ["Rufina","Sintony"  ],
-                                ["Vollkorn","Exo"  ]
-                            ]},
-        "sans-serif/sans-serif": {
-            "index":2,"pairs":[
-                                ["Abel","Ubuntu"  ],
-                                ["Amaranth","Titillium Web"  ],
-                                ["Didact Gothic","Arimo"  ],
-                                ["Dosis","Open Sans"  ],
-                                ["Droid Sans","Cabin"  ],
-                                ["Fjalla One","Cantarell"  ],
-                                ["Francois One","Didact Gothic"  ],
-                                ["Francois One","Lato"  ],
-                                ["Francois One","Open Sans"  ],
-                                ["Hind","Open Sans"  ],
-                                ["Montserrat","Hind"  ],
-                                ["Montserrat","Istok Web"  ],
-                                ["Nunito","Open Sans"  ],
-                                ["Open Sans","Nunito"  ],
-                                ["Open Sans","Oswald"  ],
-                                ["Oswald","Droid Sans"  ],
-                                ["Oswald","Open Sans"  ],
-                                ["Oxygen","Source Sans Pro"  ],
-                                ["Philosopher","Muli"  ],
-                                ["PT Sans","Cabin"  ],
-                                ["PT Sans","Didact Gothic"  ],
-                                ["Raleway","Cabin"  ],
-                                ["Raleway","Roboto"  ],
-                                ["Roboto","Nunito"  ],
-                                ["Signika","Open Sans"  ],
-                                ["Ubuntu","Cabin"  ],
-                                ["Ubuntu","Didact Gothic"  ],
-                                ["Ubuntu","Hind"  ],
-                                ["Ubuntu","Source Sans Pro"  ]
-                                ]},
-        "cursive/sans-serif": {
-            "index":3,"pairs":[
-                                ["Abril Fatface","Droid Sans"  ],
-                                ["Abril Fatface","Josefin Sans"  ],
-                                ["Abril Fatface","Lato"  ],
-                                ["Amatic SC","Andika"  ],
-                                ["Amatic SC","Josefin Sans"  ],
-                                ["Bevan","Pontano Sans"  ],
-                                ["Flamenco","Asap"  ],
-                                ["Lobster","Arimo"  ],
-                                ["Lobster","Cabin"  ],
-                                ["Medula One","Lato"  ],
-                                ["Pacifico","Arimo"  ],
-                                ["Patua One","Oswald"  ],
-                                ["Rancho","Gudea"  ],
-                                ["Shadows","Roboto"  ],
-                                ["Squada One","Allerta"  ],
-                                ["Stint Ultra","Pontano Sans"  ],
-                                ["Yeseva One","Josefin Sans"  ]
-                                ]},
-        "cursive/serif":{
-            "index":4,"pairs":[
-                                ["Alfaslab One","Gentium Book"  ],
-                                ["Clicker Script","EB Garamond"  ],
-                                ["Dancing Script","Ledger"  ],
-                                ["Dancing Script","EB Garamond"  ],
-                                ["Nixie One","Ledger"  ],
-                                ["Patua One","Lora"  ],
-                                ["Nixie One","Libre Baskerville"  ],
-                                ["Sacramento","Alice"  ],
-                                ["Sansita One","Kameron"  ],
-                                ["Unica One","Vollkorn"  ],
-                                ["Walter Turncoat","Kreon"  ],
-                                ["Yeseva One","Crimson Text"  ]
-                                ]},
-        "serif/serif":{
-            "index":5,"pairs":[
-                                ["Bree Serif","Lora"  ],
-                                ["Playfair Display","Alice"  ],
-                                ["Playfair Display","Fauna One"  ],
-                                ["Quando","Judson"  ],
-                                ["Quattrocento","Fanwood Text"  ],
-                                ["Ultra","Slabo 13px"  ]
-                                ]}
-    },
+    // fontFamilyGroups: gfont.goog
+    //     "sans-serif/serif":{
+    //         "index":0,"pairs":[ 
+    //                             ["Cabin","Old Standard TT"  ],
+    //                             ["Fjalla One","Average"  ],
+    //                             ["Istok Web","Lora"  ],
+    //                             ["Josefin Sans","Playfair Display"  ],
+    //                             ["Lato","Merriweather"  ],
+    //                             ["Montserrat","Cardo"  ],
+    //                             ["Montserrat","Crimson Text"  ],
+    //                             ["Montserrat","Domine"  ],
+    //                             ["Montserrat","Neuton"  ],
+    //                             ["Montserrat","Playfair Display"  ],
+    //                             ["Muli","Playfair Display"  ],
+    //                             ["Nunito","Alegreya"  ],
+    //                             ["Nunito","Lora"  ],
+    //                             ["Open Sans","Gentium Book Basic"  ],
+    //                             ["Open Sans","Libre Baskerville"  ],
+    //                             ["Open Sans","Lora"  ],
+    //                             ["Open Sans","Playfair Display SC"  ],
+    //                             ["Oswald","Merriweather"  ],
+    //                             ["Oswald","Old Standard TT"  ],
+    //                             ["Oswald","Quattrocento"  ],
+    //                             ["PT Sans","PT Serif"  ],
+    //                             ["Quicksand","EB Garamond"  ],
+    //                             ["Raleway","Merriweather"  ],
+    //                             ["Ubuntu","Lora"  ]
+    //                         ]},
+    //     "serif/sans-serif":{
+    //         "index":1,"pairs":[ 
+    //                             ["Alegreya","Open Sans"  ],
+    //                             ["Alegreya","Source Sans Pro"  ],
+    //                             ["Bitter","Raleway"  ],
+    //                             ["Bree Serif","Open Sans"  ],
+    //                             ["Cantata One","Imprima"  ],
+    //                             ["Cardo","Josefin Sans"  ],
+    //                             ["Crete Round","AbeeZee"  ],
+    //                             ["Josefin Slab","Josefinsans"  ],
+    //                             ["Kreon","Ubuntu"  ],
+    //                             ["Libre Baskerville","Montserrat"  ],
+    //                             ["Libre Baskerville","Open Sans"  ],
+    //                             ["Lora","Source Sans Pro"  ],
+    //                             ["Lustria","Lato"  ],
+    //                             ["Merriweather","Open Sans"  ],
+    //                             ["Merriweather","Source Sans Pro"  ],
+    //                             ["Old Standard TT","Questrial"  ],
+    //                             ["Ovo","Muli"  ],
+    //                             ["Playfair Display","Open Sans"  ],
+    //                             ["PT Serif","Open Sans"  ],
+    //                             ["Quattrocento","Quattrocento Sans"  ],
+    //                             ["Roboto Slab","Open Sans"  ],
+    //                             ["Roboto Slab","Roboto"  ],
+    //                             ["Rokkitt","Roboto"  ],
+    //                             ["Rokkitt","Ubuntu"  ],
+    //                             ["Rufina","Sintony"  ],
+    //                             ["Vollkorn","Exo"  ]
+    //                         ]},
+    //     "sans-serif/sans-serif": {
+    //         "index":2,"pairs":[
+    //                             ["Abel","Ubuntu"  ],
+    //                             ["Amaranth","Titillium Web"  ],
+    //                             ["Didact Gothic","Arimo"  ],
+    //                             ["Dosis","Open Sans"  ],
+    //                             ["Droid Sans","Cabin"  ],
+    //                             ["Fjalla One","Cantarell"  ],
+    //                             ["Francois One","Didact Gothic"  ],
+    //                             ["Francois One","Lato"  ],
+    //                             ["Francois One","Open Sans"  ],
+    //                             ["Hind","Open Sans"  ],
+    //                             ["Montserrat","Hind"  ],
+    //                             ["Montserrat","Istok Web"  ],
+    //                             ["Nunito","Open Sans"  ],
+    //                             ["Open Sans","Nunito"  ],
+    //                             ["Open Sans","Oswald"  ],
+    //                             ["Oswald","Droid Sans"  ],
+    //                             ["Oswald","Open Sans"  ],
+    //                             ["Oxygen","Source Sans Pro"  ],
+    //                             ["Philosopher","Muli"  ],
+    //                             ["PT Sans","Cabin"  ],
+    //                             ["PT Sans","Didact Gothic"  ],
+    //                             ["Raleway","Cabin"  ],
+    //                             ["Raleway","Roboto"  ],
+    //                             ["Roboto","Nunito"  ],
+    //                             ["Signika","Open Sans"  ],
+    //                             ["Ubuntu","Cabin"  ],
+    //                             ["Ubuntu","Didact Gothic"  ],
+    //                             ["Ubuntu","Hind"  ],
+    //                             ["Ubuntu","Source Sans Pro"  ]
+    //                             ]},
+    //     "cursive/sans-serif": {
+    //         "index":3,"pairs":[
+    //                             ["Abril Fatface","Droid Sans"  ],
+    //                             ["Abril Fatface","Josefin Sans"  ],
+    //                             ["Abril Fatface","Lato"  ],
+    //                             ["Amatic SC","Andika"  ],
+    //                             ["Amatic SC","Josefin Sans"  ],
+    //                             ["Bevan","Pontano Sans"  ],
+    //                             ["Flamenco","Asap"  ],
+    //                             ["Lobster","Arimo"  ],
+    //                             ["Lobster","Cabin"  ],
+    //                             ["Medula One","Lato"  ],
+    //                             ["Pacifico","Arimo"  ],
+    //                             ["Patua One","Oswald"  ],
+    //                             ["Rancho","Gudea"  ],
+    //                             ["Shadows","Roboto"  ],
+    //                             ["Squada One","Allerta"  ],
+    //                             ["Stint Ultra","Pontano Sans"  ],
+    //                             ["Yeseva One","Josefin Sans"  ]
+    //                             ]},
+    //     "cursive/serif":{
+    //         "index":4,"pairs":[
+    //                             ["Alfaslab One","Gentium Book"  ],
+    //                             ["Clicker Script","EB Garamond"  ],
+    //                             ["Dancing Script","Ledger"  ],
+    //                             ["Dancing Script","EB Garamond"  ],
+    //                             ["Nixie One","Ledger"  ],
+    //                             ["Patua One","Lora"  ],
+    //                             ["Nixie One","Libre Baskerville"  ],
+    //                             ["Sacramento","Alice"  ],
+    //                             ["Sansita One","Kameron"  ],
+    //                             ["Unica One","Vollkorn"  ],
+    //                             ["Walter Turncoat","Kreon"  ],
+    //                             ["Yeseva One","Crimson Text"  ]
+    //                             ]},
+    //     "serif/serif":{
+    //         "index":5,"pairs":[
+    //                             ["Bree Serif","Lora"  ],
+    //                             ["Playfair Display","Alice"  ],
+    //                             ["Playfair Display","Fauna One"  ],
+    //                             ["Quando","Judson"  ],
+    //                             ["Quattrocento","Fanwood Text"  ],
+    //                             ["Ultra","Slabo 13px"  ]
+    //                             ]}
+    // },
     
+
+
     fontFamilyContrast: {
         0:{"numberOfTypefaces":1, "fontFamilyGroup":"sans-serif/serif"},
         1:{"numberOfTypefaces":2, "fontFamilyGroup":"sans-serif/sans-serif"},
@@ -219,6 +249,16 @@ geenes.typography = {
         // 5:{"numberOfTypefaces":2, "fontFamilyGroups":[0,1,3]},
         // 6:{"numberOfTypefaces":3, "fontFamilyGroups":[0,1,2,5]},
         // 7:{"numberOfTypefaces":3, "fontFamilyGroups":[0,1,3,4]}
+
+    },
+    contrastPriorities:{
+        0:"Size",
+        1:"Typeface",
+        2:"Color",
+        3:"Cases",
+        4: "Style",
+        5: "Weight",
+        6: "Space",
 
     },
 
@@ -296,8 +336,24 @@ geenes.typography = {
 
     getFontFamilyContrast: function(contrastIndex){
             return geenes.common.randomElement(this.fontFamilyContrast, contrastIndex);
-    }
+    },
 
+    getGoogleFontSelection: function (category) {
+        let fontSelection = gfont.googleFonts.filter(function (font) {
+            return font.category == category;
+        })
+        return fontSelection;
+    },
+
+    randomContrastPriority: function(genes){
+        let seed = genes;
+        //transform object in array
+        var contrastPriorities = Object.keys(this.contrastPriorities).map(key => this.contrastPriorities[key])
+
+        //randomise the order based on geenes(seed)
+      
+        return  geenes.common.randomShuffle(contrastPriorities, seed);
+    }
 }
 
 

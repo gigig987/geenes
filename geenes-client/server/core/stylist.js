@@ -6,9 +6,14 @@ var geenes = require('./libraries');
 var htmlparser = require("htmlparser2");
 var cheerio = require('cheerio');
 
+function getRandomGoogleFont(){
+  return geenes.typography.getRandomGoogleFont();
+}
+
+exports.getRandomGoogleFont = getRandomGoogleFont;
 // template is a string to be parsed
 //geenesArray is an Array<geenes>
-function styleFromTemplateString(template, genesArray) {
+function style(genesArray) {
 
   var result = {};
   var constrastIndex;
@@ -18,6 +23,9 @@ function styleFromTemplateString(template, genesArray) {
 
   var baseFontWeight;
   var fontWeightContrast;
+  var fontCategory;
+  var fontFamilyHeading;
+  var contrastPriority = [];
   var constructorFontFamily = [];
   var i = 0;
 
@@ -32,26 +40,20 @@ function styleFromTemplateString(template, genesArray) {
       fontWeightContrast = geenes.common.randomElement(geenes.typography.fontWeights, Math.abs((genes[4] - 1)));
 
       constructorFontFamily = [genes[5], genes[6], genes[7]];
+      fontCategory = geenes.common.randomElement(geenes.typography.fontCategories, genes[5]);
+      let fontSelection = geenes.typography.getGoogleFontSelection(fontCategory);
+      fontFamilyHeading = geenes.common.randomElement(fontSelection, genes[6]);
 
+      contrastPriority = geenes.typography.randomContrastPriority(genes[10]);
 
-
-      result[i] = {};
-      var parser = new htmlparser.Parser({
-        onopentagname: function (name) {
-          if (name === "p") {
-            var p = geenes.typography.typeSettings(0, baseFontSize, typeScaleRatio, baselineM, baseFontWeight, constrastIndex, constructorFontFamily);
-            result[i].p = p;
-          }
-          if (name === "h1") {
-            var h1 = geenes.typography.typeSettings(3, baseFontSize, typeScaleRatio, baselineM, fontWeightContrast, constrastIndex, constructorFontFamily);
-            result[i].h1 = h1;
-          }
-        },
-      }, { decodeEntities: true });
-      parser.write(template);
-      parser.end();
-
-      i++;
+      result[i] = { 'index': constrastIndex,
+                    'base-font-size': baseFontSize, 
+                    'baseline-multiplier': baselineM, 
+                    'type-scale': typeScaleRatio,
+                    'font-category':fontCategory,
+                    'font-family-H': fontFamilyHeading,
+                    'contrast-priority': contrastPriority   }
+      i++
     }, this);
   }
 
@@ -59,7 +61,7 @@ function styleFromTemplateString(template, genesArray) {
   return result;
 }
 
-exports.styleFromTemplateString = styleFromTemplateString;
+exports.style = style;
 
 function styleFromTemplateStringToHtml(template, genesArray) {
 
