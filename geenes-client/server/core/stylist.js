@@ -28,6 +28,7 @@ function style(genesArray) {
   var contrastPriority = [];
   var constructorFontFamily = [];
   var i = 0;
+  var typescaleSelection;
 
   if (genesArray.constructor === Array) {
     genesArray.forEach(function (genes) {
@@ -44,7 +45,8 @@ function style(genesArray) {
       let fontSelection = geenes.typography.getGoogleFontSelection(fontCategory);
       fontFamilyHeading = geenes.common.randomElement(fontSelection, genes[6]);
 
-      contrastPriority = geenes.typography.randomContrastPriority(genes[10]);
+      contrastPriority = geenes.typography.randomContrastPriority(genes[7]);
+      typescaleSelection = geenes.typography.sliceTypescales(constrastIndex,contrastPriority, 0.75);
 
       result[i] = { 'index': constrastIndex,
                     'base-font-size': baseFontSize, 
@@ -52,7 +54,8 @@ function style(genesArray) {
                     'type-scale': typeScaleRatio,
                     'font-category':fontCategory,
                     'font-family-H': fontFamilyHeading,
-                    'contrast-priority': contrastPriority   }
+                    'contrast-priority': contrastPriority,
+                    'typescale-selection': typescaleSelection  }
       i++
     }, this);
   }

@@ -10,6 +10,8 @@ geenes.common = {
 
     },
 
+
+
  randomShuffle: function (obj,seed){
 var array;
 var numbers = [];
@@ -101,143 +103,6 @@ geenes.typography = {
         "4":"monospace"
     },
 
-    // fontFamilyGroups: gfont.goog
-    //     "sans-serif/serif":{
-    //         "index":0,"pairs":[ 
-    //                             ["Cabin","Old Standard TT"  ],
-    //                             ["Fjalla One","Average"  ],
-    //                             ["Istok Web","Lora"  ],
-    //                             ["Josefin Sans","Playfair Display"  ],
-    //                             ["Lato","Merriweather"  ],
-    //                             ["Montserrat","Cardo"  ],
-    //                             ["Montserrat","Crimson Text"  ],
-    //                             ["Montserrat","Domine"  ],
-    //                             ["Montserrat","Neuton"  ],
-    //                             ["Montserrat","Playfair Display"  ],
-    //                             ["Muli","Playfair Display"  ],
-    //                             ["Nunito","Alegreya"  ],
-    //                             ["Nunito","Lora"  ],
-    //                             ["Open Sans","Gentium Book Basic"  ],
-    //                             ["Open Sans","Libre Baskerville"  ],
-    //                             ["Open Sans","Lora"  ],
-    //                             ["Open Sans","Playfair Display SC"  ],
-    //                             ["Oswald","Merriweather"  ],
-    //                             ["Oswald","Old Standard TT"  ],
-    //                             ["Oswald","Quattrocento"  ],
-    //                             ["PT Sans","PT Serif"  ],
-    //                             ["Quicksand","EB Garamond"  ],
-    //                             ["Raleway","Merriweather"  ],
-    //                             ["Ubuntu","Lora"  ]
-    //                         ]},
-    //     "serif/sans-serif":{
-    //         "index":1,"pairs":[ 
-    //                             ["Alegreya","Open Sans"  ],
-    //                             ["Alegreya","Source Sans Pro"  ],
-    //                             ["Bitter","Raleway"  ],
-    //                             ["Bree Serif","Open Sans"  ],
-    //                             ["Cantata One","Imprima"  ],
-    //                             ["Cardo","Josefin Sans"  ],
-    //                             ["Crete Round","AbeeZee"  ],
-    //                             ["Josefin Slab","Josefinsans"  ],
-    //                             ["Kreon","Ubuntu"  ],
-    //                             ["Libre Baskerville","Montserrat"  ],
-    //                             ["Libre Baskerville","Open Sans"  ],
-    //                             ["Lora","Source Sans Pro"  ],
-    //                             ["Lustria","Lato"  ],
-    //                             ["Merriweather","Open Sans"  ],
-    //                             ["Merriweather","Source Sans Pro"  ],
-    //                             ["Old Standard TT","Questrial"  ],
-    //                             ["Ovo","Muli"  ],
-    //                             ["Playfair Display","Open Sans"  ],
-    //                             ["PT Serif","Open Sans"  ],
-    //                             ["Quattrocento","Quattrocento Sans"  ],
-    //                             ["Roboto Slab","Open Sans"  ],
-    //                             ["Roboto Slab","Roboto"  ],
-    //                             ["Rokkitt","Roboto"  ],
-    //                             ["Rokkitt","Ubuntu"  ],
-    //                             ["Rufina","Sintony"  ],
-    //                             ["Vollkorn","Exo"  ]
-    //                         ]},
-    //     "sans-serif/sans-serif": {
-    //         "index":2,"pairs":[
-    //                             ["Abel","Ubuntu"  ],
-    //                             ["Amaranth","Titillium Web"  ],
-    //                             ["Didact Gothic","Arimo"  ],
-    //                             ["Dosis","Open Sans"  ],
-    //                             ["Droid Sans","Cabin"  ],
-    //                             ["Fjalla One","Cantarell"  ],
-    //                             ["Francois One","Didact Gothic"  ],
-    //                             ["Francois One","Lato"  ],
-    //                             ["Francois One","Open Sans"  ],
-    //                             ["Hind","Open Sans"  ],
-    //                             ["Montserrat","Hind"  ],
-    //                             ["Montserrat","Istok Web"  ],
-    //                             ["Nunito","Open Sans"  ],
-    //                             ["Open Sans","Nunito"  ],
-    //                             ["Open Sans","Oswald"  ],
-    //                             ["Oswald","Droid Sans"  ],
-    //                             ["Oswald","Open Sans"  ],
-    //                             ["Oxygen","Source Sans Pro"  ],
-    //                             ["Philosopher","Muli"  ],
-    //                             ["PT Sans","Cabin"  ],
-    //                             ["PT Sans","Didact Gothic"  ],
-    //                             ["Raleway","Cabin"  ],
-    //                             ["Raleway","Roboto"  ],
-    //                             ["Roboto","Nunito"  ],
-    //                             ["Signika","Open Sans"  ],
-    //                             ["Ubuntu","Cabin"  ],
-    //                             ["Ubuntu","Didact Gothic"  ],
-    //                             ["Ubuntu","Hind"  ],
-    //                             ["Ubuntu","Source Sans Pro"  ]
-    //                             ]},
-    //     "cursive/sans-serif": {
-    //         "index":3,"pairs":[
-    //                             ["Abril Fatface","Droid Sans"  ],
-    //                             ["Abril Fatface","Josefin Sans"  ],
-    //                             ["Abril Fatface","Lato"  ],
-    //                             ["Amatic SC","Andika"  ],
-    //                             ["Amatic SC","Josefin Sans"  ],
-    //                             ["Bevan","Pontano Sans"  ],
-    //                             ["Flamenco","Asap"  ],
-    //                             ["Lobster","Arimo"  ],
-    //                             ["Lobster","Cabin"  ],
-    //                             ["Medula One","Lato"  ],
-    //                             ["Pacifico","Arimo"  ],
-    //                             ["Patua One","Oswald"  ],
-    //                             ["Rancho","Gudea"  ],
-    //                             ["Shadows","Roboto"  ],
-    //                             ["Squada One","Allerta"  ],
-    //                             ["Stint Ultra","Pontano Sans"  ],
-    //                             ["Yeseva One","Josefin Sans"  ]
-    //                             ]},
-    //     "cursive/serif":{
-    //         "index":4,"pairs":[
-    //                             ["Alfaslab One","Gentium Book"  ],
-    //                             ["Clicker Script","EB Garamond"  ],
-    //                             ["Dancing Script","Ledger"  ],
-    //                             ["Dancing Script","EB Garamond"  ],
-    //                             ["Nixie One","Ledger"  ],
-    //                             ["Patua One","Lora"  ],
-    //                             ["Nixie One","Libre Baskerville"  ],
-    //                             ["Sacramento","Alice"  ],
-    //                             ["Sansita One","Kameron"  ],
-    //                             ["Unica One","Vollkorn"  ],
-    //                             ["Walter Turncoat","Kreon"  ],
-    //                             ["Yeseva One","Crimson Text"  ]
-    //                             ]},
-    //     "serif/serif":{
-    //         "index":5,"pairs":[
-    //                             ["Bree Serif","Lora"  ],
-    //                             ["Playfair Display","Alice"  ],
-    //                             ["Playfair Display","Fauna One"  ],
-    //                             ["Quando","Judson"  ],
-    //                             ["Quattrocento","Fanwood Text"  ],
-    //                             ["Ultra","Slabo 13px"  ]
-    //                             ]}
-    // },
-    
-
-
     fontFamilyContrast: {
         0:{"numberOfTypefaces":1, "fontFamilyGroup":"sans-serif/serif"},
         1:{"numberOfTypefaces":2, "fontFamilyGroup":"sans-serif/sans-serif"},
@@ -252,9 +117,9 @@ geenes.typography = {
 
     },
     contrastPriorities:{
-        0:"Size",
+        0:"Color",
         1:"Typeface",
-        2:"Color",
+        2:"Size",
         3:"Cases",
         4: "Style",
         5: "Weight",
@@ -353,6 +218,44 @@ geenes.typography = {
         //randomise the order based on geenes(seed)
       
         return  geenes.common.randomShuffle(contrastPriorities, seed);
+    },
+
+
+
+// takes the contrast index and the contrast priority order to return a given percentage of all the possible typescales
+// higher the contrast and the priority higher the values of the typescale will be
+    sliceTypescales: function(contrastIndex, contrastPriorities, percentage){
+            // this determines how heavy the contrast is. 0 to 1. near 0 means that the contrast is low and the style is more flat.
+            var ci = contrastIndex;
+
+            //lenght of the shuffled array
+            var cp = contrastPriorities.length;
+
+            // variable to define how many other items to pick in the list from the middle point
+            // it should be between 0.25 and 1
+            // 1 is the entire list, 0.25 is one quarter of the list
+            var p = percentage;
+
+            // this define the position of Size in the shuffled array. 
+            var i = contrastPriorities.findIndex(function(element){return element == 'Size' } )
+            
+            // this formula calculate the middle point of the typescales list like so:
+            // contrast index * a weight. the weight is maximum 1 or 1 minus a malus dependent on the position of Size in the shuffled array
+            var mp = ci * (1 - (1 / cp) * i)
+            //variance, meaning the elements to add around the middle point 
+            var v =  Math.floor((cp * p) / 2);
+            
+            //transforming the typescalis list from an object to an array.
+            var ts = Object.keys(this.typeScales).map(key => this.typeScales[key])
+
+            //finding the index of this element
+            var mpi = ts.indexOf(geenes.common.randomElement(this.typeScales, mp))
+
+            //check that the variance doesn't overflow the first or last item of the list
+            var min = mpi-v<0 ? 0 : mpi-v
+            var max = mpi+v>ts.length ? ts.length : mpi+v
+            //return an array of  a portion of typescales 
+            return ts.slice(min, max+1);
     }
 }
 
